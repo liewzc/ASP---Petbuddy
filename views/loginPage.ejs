@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Pet Care Service</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <%- include('partials/header') %>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="form-box">
+            <h1>Login</h1>
+            <p>Enter your credentials to access your account.</p>
+            
+            <!-- Display login error if exists -->
+            <% if (error) { %>
+                <div class="error-message">
+                    <p><%= error %></p>
+                </div>
+            <% } %>
+
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p class="mt-4"><a href="/forgot-password" class="text-blue-500">Forgot Password?</a></p>
+            <p class="mt-4">Don't have an account? <a href="/register" class="text-blue-500">Click here to create a new account</a></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+</body>
+</html>

@@ -150,9 +150,11 @@ app.post('/reset-password', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Petbuddy is running at http://localhost:${PORT}`);
 });
+
 
 // testing
 // testing2

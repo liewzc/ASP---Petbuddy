@@ -2,11 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose(); // Import SQLite library
+const fileUpload = require('express-fileupload'); // Import express-fileupload
+
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload()); // Use express-fileupload middleware
 
 // Connect to the SQLite database
 const db = new sqlite3.Database('./database.db', (err) => {
@@ -76,7 +79,6 @@ app.post('/register', (req, res) => {
     res.redirect('/register');
   }
 });
-
 
 // Route for the login page
 app.get('/login', (req, res) => {
@@ -149,13 +151,89 @@ app.post('/reset-password', (req, res) => {
   });
 });
 
+// Profile customer Start-----------------------------------
+// Route for the profile page
+app.get('/profile', (req, res) => {
+  res.render('profileCustomer', { profile: null });
+});
+
+// Handle profile updates
+app.post('/profile', (req, res) => {
+  const {
+    fullName,
+    contactNumber,
+    email,
+    address,
+    emergencyContact,
+    petName,
+    petBreed,
+    petAge,
+    petWeight,
+    petHealth,
+    petDiet,
+    petAllergies,
+    petBehavior,
+    serviceType,
+    serviceFrequency,
+    serviceTime,
+    specialRequirements,
+    additionalNotes
+  } = req.body;
+  
+  // Handle file upload
+  let petPhoto = '';
+  if (req.files && req.files.petPhoto) {
+    petPhoto = req.files.petPhoto.name;
+    req.files.petPhoto.mv(`./public/uploads/${petPhoto}`, err => {
+      if (err) {
+        console.error('Error uploading file:', err.message);
+      }
+    });
+  }
+  
+  // In a real application, you would save this information to a database
+  // For demonstration purposes, we'll just render it back to the user
+  
+  const profile = {
+    fullName,
+    contactNumber,
+    email,
+    address,
+    emergencyContact,
+    petName,
+    petBreed,
+    petAge,
+    petWeight,
+    petHealth,
+    petDiet,
+    petAllergies,
+    petBehavior,
+    serviceType,
+    serviceFrequency,
+    serviceTime,
+    specialRequirements,
+    petPhoto,
+    additionalNotes
+  };
+
+  res.render('profileCustomer', { profile });
+});
+
+// Route for editing profile
+app.get('/edit-profile', (req, res) => {
+  res.render('profileCustomer', { profile: null });
+});
+
+// Route for logging out
+app.post('/logout', (req, res) => {
+  // Implement logout logic here, e.g., clearing session
+  res.redirect('/login');
+});
+
+// Profile customer END-------------------------------------------
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Petbuddy is running at http://localhost:${PORT}`);
 });
-
-
-// testing
-// testing2
-//testing3

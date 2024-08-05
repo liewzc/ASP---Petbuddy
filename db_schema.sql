@@ -33,4 +33,15 @@ CREATE TABLE IF NOT EXISTS Review (
     FOREIGN KEY (staffId) REFERENCES Staff(id) ON DELETE CASCADE
 );
 
+-- Create Booking table
+CREATE TABLE IF NOT EXISTS Bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    package TEXT NOT NULL,
+    name TEXT NOT NULL,
+    date TEXT NOT NULL,
+    time TEXT NOT NULL,
+    address TEXT NOT NULL,
+    phone TEXT NOT NULL
+);
+
 COMMIT;

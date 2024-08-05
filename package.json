@@ -1,0 +1,23 @@
+{
+  "name": "asp---petbuddy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build-db": "cat db_schema.sql | sqlite3 database.db", 
+    "clean-db": "rm database.db", 
+    "build-db-win": "sqlite3 database.db < db_schema.sql",
+    "clean-db-win": "del database.db",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  }
+}

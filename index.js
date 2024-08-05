@@ -61,6 +61,22 @@ app.get('/booking/confirmation', (req, res) => {
   res.render('bookingConfirmation');
 });
 
+// Route to render the booking page
+app.get('/booking', (req, res) => {
+  res.render('bookingPage');
+});
+
+// Route for the booking form page
+app.get('/booking/bookingform', (req, res) => {
+  const packageName = req.query.package || 'Default Package';
+  res.render('bookingForm', { package: packageName });
+});
+
+// Route for the confirmation page
+app.get('/booking/confirmation', (req, res) => {
+  res.render('bookingConfirmation');
+});
+
 // Handle registration requests
 app.post('/register', (req, res) => {
   const { username, useremail, password, role } = req.body;
@@ -184,12 +200,7 @@ app.post('/booking/bookingform', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-  console.log(`Petbuddy is running at http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
 
-
-// testing
-// testing2
-//testing3

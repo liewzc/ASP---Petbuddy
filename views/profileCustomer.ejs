@@ -3,113 +3,197 @@
 <head>
   <title>Customer Profile</title>
   <link rel="stylesheet" href="/main.css">
+  <style>
+    /* General Styles */
+    body {
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-top: 0;
+    }
+
+    .profile-section {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .profile-section h2 {
+        margin-top: 0;
+    }
+
+    .profile-section p {
+        line-height: 1.6;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #28a745; /* Green color */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+
+    .mt-4 {
+        margin-top: 16px;
+    }
+  </style>
 </head>
 <body>
     <%- include('partials/header') %>
 
-  <% if (profile) { %>
-    <!-- Display the profile data after form submission -->
-    <h1>Customer Profile</h1>
-    <p><strong>Full Name:</strong> <%= profile.fullName %></p>
-    <p><strong>Contact Number:</strong> <%= profile.contactNumber %></p>
-    <p><strong>Email:</strong> <%= profile.email %></p>
-    <p><strong>Address:</strong> <%= profile.address %></p>
-    <p><strong>Emergency Contact:</strong> <%= profile.emergencyContact %></p>
-    <p><strong>Pet Name:</strong> <%= profile.petName %></p>
-    <p><strong>Pet Breed:</strong> <%= profile.petBreed %></p>
-    <p><strong>Pet Age:</strong> <%= profile.petAge %></p>
-    <p><strong>Pet Weight:</strong> <%= profile.petWeight %></p>
-    <p><strong>Pet Health:</strong> <%= profile.petHealth %></p>
-    <p><strong>Pet Diet:</strong> <%= profile.petDiet %></p>
-    <p><strong>Pet Allergies:</strong> <%= profile.petAllergies %></p>
-    <p><strong>Pet Behavior:</strong> <%= profile.petBehavior %></p>
-    <p><strong>Service Type:</strong> <%= profile.serviceType %></p>
-    <p><strong>Service Frequency:</strong> <%= profile.serviceFrequency %></p>
-    <p><strong>Service Time:</strong> <%= profile.serviceTime %></p>
-    <p><strong>Special Requirements:</strong> <%= profile.specialRequirements %></p>
-    <p><strong>Additional Notes:</strong> <%= profile.additionalNotes %></p>
-    <% if (profile.petPhoto) { %>
-      <p><strong>Pet Photo:</strong> <img src="/uploads/<%= profile.petPhoto %>" alt="Pet Photo" style="max-width: 200px;"></p>
-    <% } %>
+    <div class="container">
+      <% if (profile) { %>
+        <!-- Display the profile data after form submission -->
+        <div class="profile-section">
+          <h1>Customer Profile</h1>
+          <p><strong>Full Name:</strong> <%= profile.fullName %></p>
+          <p><strong>Contact Number:</strong> <%= profile.contactNumber %></p>
+          <p><strong>Address:</strong> <%= profile.address %></p>
+          <p><strong>Emergency Contact:</strong> <%= profile.emergencyContact %></p>
+          <% if (profile.petPhoto) { %>
+            <p><strong>Pet Photo:</strong> <img src="/uploads/<%= profile.petPhoto %>" alt="Pet Photo" style="max-width: 200px;"></p>
+          <% } %>
+          <p><strong>Pet Name:</strong> <%= profile.petName %></p>
+          <p><strong>Pet Breed:</strong> <%= profile.petBreed %></p>
+          <p><strong>Pet Age:</strong> <%= profile.petAge %></p>
+          <p><strong>Pet Weight:</strong> <%= profile.petWeight %></p>
+          <p><strong>Pet Health:</strong> <%= profile.petHealth %></p>
+          <p><strong>Pet Diet:</strong> <%= profile.petDiet %></p>
+          <p><strong>Pet Allergies:</strong> <%= profile.petAllergies %></p>
+          <p><strong>Pet Behavior:</strong> <%= profile.petBehavior %></p>
+          <p><strong>Service Frequency:</strong> <%= profile.serviceFrequency %></p>
+          <p><strong>Special Requirements:</strong> <%= profile.specialRequirements %></p>
+          <p><strong>Additional Notes:</strong> <%= profile.additionalNotes %></p>
 
-    <!-- Display the Edit and Logout buttons -->
-    <form action="/edit-profile" method="get">
-      <button type="submit">Edit Profile</button>
-    </form>
-    <form action="/logout" method="post">
-      <button type="submit">Log Out</button>
-    </form>
+          <!-- Display the Edit and Logout buttons -->
+          <form action="/edit-profile" method="get">
+            <button type="submit">Edit Profile</button>
+          </form>
+          <form action="/logout" method="post">
+            <button type="submit">Log Out</button>
+          </form>
+        </div>
 
-  <% } else { %>
-    <!-- Display the form to input profile data if not submitted -->
-    <h1>Profile</h1>
-    <form action="/profile" method="post" enctype="multipart/form-data">
+      <% } else { %>
+        <!-- Display the form to input profile data if not submitted -->
+        <div class="profile-section">
+          <h1>Profile</h1>
+          <form action="/profile" method="post" enctype="multipart/form-data">
+            <h3>Customer Information</h3>        
+            <div class="form-group">
+              <label for="fullName">Full Name:</label>
+              <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="form-group">
+              <label for="contactNumber">Contact Number:</label>
+              <input type="text" id="contactNumber" name="contactNumber" required>
+            </div>
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+              <label for="emergencyContact">Emergency Contact:</label>
+              <input type="text" id="emergencyContact" name="emergencyContact" required>
+            </div>
 
-    <h3>Customer Information</h3>        
-      <label for="fullName">Full Name:</label>
-      <input type="text" id="fullName" name="fullName" required><br>
+            <h3>Pet Information</h3>  
+            <div class="form-group">
+              <label for="petPhoto">Pet Photo:</label>
+              <input type="file" id="petPhoto" name="petPhoto">
+            </div>
+            <div class="form-group">
+              <label for="petName">Pet Name:</label>
+              <input type="text" id="petName" name="petName" required>
+            </div>
+            <div class="form-group">
+              <label for="petBreed">Pet Breed:</label>
+              <input type="text" id="petBreed" name="petBreed" required>
+            </div>
+            <div class="form-group">
+              <label for="petAge">Pet Age:</label>
+              <input type="text" id="petAge" name="petAge" required>
+            </div>
+            <div class="form-group">
+              <label for="petWeight">Pet Weight:</label>
+              <input type="text" id="petWeight" name="petWeight" required>
+            </div>
+            <div class="form-group">
+              <label for="petHealth">Pet Health:</label>
+              <input type="text" id="petHealth" name="petHealth" required>
+            </div>
+            <div class="form-group">
+              <label for="petDiet">Pet Diet:</label>
+              <input type="text" id="petDiet" name="petDiet" required>
+            </div>
+            <div class="form-group">
+              <label for="petAllergies">Pet Allergies:</label>
+              <input type="text" id="petAllergies" name="petAllergies" required>
+            </div>
+            <div class="form-group">
+              <label for="petBehavior">Pet Behavior:</label>
+              <input type="text" id="petBehavior" name="petBehavior" required>
+            </div>
 
-      <label for="contactNumber">Contact Number:</label>
-      <input type="text" id="contactNumber" name="contactNumber" required><br>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required><br>
-
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" required><br>
-
-      <label for="emergencyContact">Emergency Contact:</label>
-      <input type="text" id="emergencyContact" name="emergencyContact" required><br>
-
-    <h3>Pet Information</h3>  
-      <label for="petPhoto">Pet Photo:</label>
-      <input type="file" id="petPhoto" name="petPhoto"><br>
-
-      <label for="petName">Pet Name:</label>
-      <input type="text" id="petName" name="petName" required><br>
-
-      <label for="petBreed">Pet Breed:</label>
-      <input type="text" id="petBreed" name="petBreed" required><br>
-
-      <label for="petAge">Pet Age:</label>
-      <input type="text" id="petAge" name="petAge" required><br>
-
-      <label for="petWeight">Pet Weight:</label>
-      <input type="text" id="petWeight" name="petWeight" required><br>
-
-      <label for="petHealth">Pet Health:</label>
-      <input type="text" id="petHealth" name="petHealth" required><br>
-
-      <label for="petDiet">Pet Diet:</label>
-      <input type="text" id="petDiet" name="petDiet" required><br>
-
-      <label for="petAllergies">Pet Allergies:</label>
-      <input type="text" id="petAllergies" name="petAllergies" required><br>
-
-      <label for="petBehavior">Pet Behavior:</label>
-      <input type="text" id="petBehavior" name="petBehavior" required><br>
-
-    <h3>Service Requirement</h3>  
-      <label for="serviceType">Service Type:</label>
-      <input type="text" id="serviceType" name="serviceType" required><br>
-
-      <label for="serviceFrequency">Service Frequency:</label>
-      <input type="text" id="serviceFrequency" name="serviceFrequency" required><br>
-
-      <label for="serviceTime">Service Time:</label>
-      <input type="text" id="serviceTime" name="serviceTime" required><br>
-
-      <label for="specialRequirements">Special Requirements:</label>
-      <input type="text" id="specialRequirements" name="specialRequirements" required><br>
-
-      <label for="additionalNotes">Additional Notes:</label>
-      <textarea id="additionalNotes" name="additionalNotes" required></textarea><br>
-
-
-
-      <button type="submit">Submit</button>
-    </form>
-  <% } %>
+            <h3>Service Requirement</h3>  
+            <div class="form-group">
+              <label for="serviceFrequency">Service Frequency:</label>
+              <input type="text" id="serviceFrequency" name="serviceFrequency" required>
+            </div>
+            <div class="form-group">
+              <label for="specialRequirements">Special Requirements:</label>
+              <input type="text" id="specialRequirements" name="specialRequirements" required>
+            </div>
+            <div class="form-group">
+              <label for="additionalNotes">Additional Notes:</label>
+              <textarea id="additionalNotes" name="additionalNotes" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      <% } %>
+    </div>
 
     <!-- Footer -->
     <%- include('partials/footer') %>

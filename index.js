@@ -48,6 +48,38 @@ app.get('/register', (req, res) => {
   res.render('registerPage');
 });
 
+// Route to render the booking page
+app.get('/booking', (req, res) => {
+  res.render('bookingPage');
+});
+
+// Route for the booking form page
+app.get('/booking/bookingform', (req, res) => {
+  const packageName = req.query.package || 'Default Package';
+  res.render('bookingForm', { package: packageName });
+});
+
+// Route for the confirmation page
+app.get('/booking/confirmation', (req, res) => {
+  res.render('bookingConfirmation');
+});
+
+// Route to render the booking page
+app.get('/booking', (req, res) => {
+  res.render('bookingPage');
+});
+
+// Route for the booking form page
+app.get('/booking/bookingform', (req, res) => {
+  const packageName = req.query.package || 'Default Package';
+  res.render('bookingForm', { package: packageName });
+});
+
+// Route for the confirmation page
+app.get('/booking/confirmation', (req, res) => {
+  res.render('bookingConfirmation');
+});
+
 // Handle registration requests
 app.post('/register', (req, res) => {
   const { username, useremail, password, role } = req.body;
@@ -228,6 +260,24 @@ app.post('/logout', (req, res) => {
 });
 
 // Profile customer END-------------------------------------------
+
+// Handle form submission
+app.post('/booking/bookingform', (req, res) => {
+  const { package, name, date, time, address, phone } = req.body;
+
+  // Insert booking data into the database
+  db.run(`INSERT INTO Bookings (package, name, date, time, address, phone) VALUES (?, ?, ?, ?, ?, ?)`,
+    [package, name, date, time, address, phone],
+    function(err) {
+      if (err) {
+        console.error('Error inserting booking:', err.message);
+        res.status(500).send('Error saving booking');
+        return;
+      }
+      // Pass booking details to the confirmation page
+      res.render('bookingConfirmation', { package, name, date, time, address, phone });
+    });
+});
 
 const PORT = process.env.PORT || 3000;
 

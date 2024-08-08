@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose a Package</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <%- include('partials/header') %>
+
+    <h1>Choose a Package</h1>
+    <div class="packages">
+        <div class="package">
+            <h2>Package 1</h2>
+            <p>Our Basic Package includes:</p>
+            <ul>
+                <li>30-minute consultation</li>
+                <li>Basic grooming services</li>
+                <li>Nail trimming</li>
+                <li>Ear cleaning</li>
+            </ul>
+            <p>Price: $30</p>
+            <button onclick="window.location.href='/booking/bookingform?package=Package 1'">Select Package</button>
+        </div>
+        <div class="package">
+            <h2>Package 2</h2>
+            <p>Our Standard Package includes:</p>
+            <ul>
+                <li>1-hour consultation</li>
+                <li>Complete grooming services</li>
+                <li>Nail trimming</li>
+                <li>Ear cleaning</li>
+                <li>Teeth brushing</li>
+            </ul>
+            <p>Price: $50</p>
+            <button onclick="window.location.href='/booking/bookingform?package=Package 2'">Select Package</button>
+        </div>
+        <div class="package">
+            <h2>Package 3</h2>
+            <p>Our Premium Package includes:</p>
+            <ul>
+                <li>2-hour consultation</li>
+                <li>Complete grooming services</li>
+                <li>Nail trimming</li>
+                <li>Ear cleaning</li>
+                <li>Teeth brushing</li>
+                <li>Medicated bath</li>
+                <li>Specialty fur treatment</li>
+            </ul>
+            <p>Price: $80</p>
+            <button onclick="window.location.href='/booking/bookingform?package=Package 3'">Select Package</button>
+        </div>
+    </div>
+
+     <!-- Footer -->
+     <%- include('partials/footer') %>
+</body>
+
+<style>
+        .packages {
+            display: flex;
+            justify-content: center; /* Center the packages */
+            gap: 20px; /* Add space between the packages */
+            padding: 20px;
+            flex-wrap: wrap; /* Allow packages to wrap to the next line on smaller screens */
+        }
+
+        .package {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 28%;
+            padding-bottom: 60px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative; /* Ensure absolute positioning works */
+            
+        }
+
+        .package h2, .package p {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .package ul {
+            list-style-type: disc;
+            padding-left: 20px; /* Add padding to align the discs properly */
+            margin: 0 auto;
+            display: inline-block; /* Center the list */
+            text-align: center; /* Aligns the list items to the left for better readability */
+        }
+
+        .package ul li {
+            padding: 5px 0;
+        }
+
+        .package button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        position: absolute; /* Position the button absolutely */
+        bottom: 10px; /* Position the button 10px from the bottom */
+        left: 50%;
+        transform: translateX(-50%); /* Center the button horizontally */
+        }
+
+        .package button:hover {
+            background-color: #0056b3;
+        }
+</style>
+</html>

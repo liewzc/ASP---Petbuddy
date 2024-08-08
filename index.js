@@ -197,7 +197,6 @@ app.post('/profile', (req, res) => {
   const profile = {
     fullName,
     contactNumber,
-    email,
     address,
     emergencyContact,
     petName,
@@ -208,9 +207,7 @@ app.post('/profile', (req, res) => {
     petDiet,
     petAllergies,
     petBehavior,
-    serviceType,
     serviceFrequency,
-    serviceTime,
     specialRequirements,
     petPhoto,
     additionalNotes

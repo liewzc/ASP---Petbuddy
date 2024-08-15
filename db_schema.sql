@@ -31,6 +31,7 @@ CREATE TABLE UserProfile (
 );
 
 
+
 --- Table: Review
 CREATE TABLE IF NOT EXISTS reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

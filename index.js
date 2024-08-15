@@ -35,6 +35,7 @@ app.get('/services', (req, res) => {
 
 // Route for the reviews page
 app.get('/reviews', (req, res) => {
+
   calculateAverageRatings((averageRatings) => {
       res.render('reviewPage', { averageRatings });
   });
@@ -62,6 +63,7 @@ app.get('/show-reviews', (req, res) => {
           res.json(rows);
       }
   });
+
 });
 
 // Route for the contact us page
@@ -319,6 +321,7 @@ function calculateAverageRatings(callback) {
       callback(averageRatings);
   });
 }
+
 
 const PORT = process.env.PORT || 3000;
 

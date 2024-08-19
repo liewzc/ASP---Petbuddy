@@ -4,122 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us - Pet Care Service</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/main.css">
   <style>
     body {
-      font-family: 'Times New Roman', sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow: hidden; /* Prevent scrollbars from appearing */
+      position: relative; /* Required for absolute positioning of the pseudo-element */
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      border-radius: 12px;
+      position: relative; /* Ensure the overlay effect is positioned correctly */
+      z-index: 1; /* Ensure the content is above the background */
     }
 
     .about-us-container {
       max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
 
     h1 {
-      font-size: 2.5em;
-      color: #333;
+      font-size: 2.8em;
       margin-bottom: 20px;
+      color: #333;
     }
 
     p {
       font-size: 1.2em;
+      line-height: 1.8;
       color: #666;
-      line-height: 1.6;
       margin-bottom: 20px;
     }
 
-    h2 {
-      font-size: 2em;
-      color: #333;
-      margin-top: 40px;
-      margin-bottom: 20px;
+    .mission-section {
+      margin-top: 30px;
     }
 
-    ul, ol {
-      text-align: left;
-      margin: 0 auto;
-      padding: 0;
-      max-width: 700px;
+    .mission-section h2 {
+      font-size: 2.2em;
+      margin-bottom: 15px;
+      color: #444;
+      font-weight: 600;
     }
 
-    li {
-      font-size: 1.2em;
+    .mission-section p {
+      font-size: 1.1em;
+      line-height: 1.8;
       color: #555;
-      margin-bottom: 10px;
     }
 
-    li strong {
+    footer {
+      background-color: #d3b8ae;
+      padding: 30px;
+      text-align: center;
+      font-family: 'Times New Roman', Times, serif, sans-serif;
       color: #333;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .about-us-container {
-        padding: 15px;
-      }
-
-      h1 {
-        font-size: 2em;
-      }
-
-      h2 {
-        font-size: 1.7em;
-      }
-
-      p, li {
-        font-size: 1.1em;
-      }
+    /* Blurred background effect */
+    .main-content::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/catbg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(px); /* Adjust the blur effect as needed */
+      z-index: -1; /* Place it behind the content */
     }
   </style>
 </head>
 <body>
   <%- include('partials/header') %>
 
-  <!-- Main Content -->
-  <div class="about-us-container">
-    <h1>About Us</h1>
-    <p>Learn more about our mission and values.</p>
+  <div class="main-content">
+    <div class="about-us-container">
+      <h1>About Us</h1>
+      <p>Welcome to Pet Care Service! Our goal is to offer exceptional care for your beloved pets, connecting pet owners with reliable and trusted services. We aim to provide peace of mind knowing your pets are in good hands.</p>
 
-    <!-- Mission Section -->
-    <section class="mission-section">
-      <h2>Our Mission</h2>
-      <p>At Pet Care Service, our mission is to provide a loving and safe environment for pets while their owners are away. We aim to connect pet owners with trusted and reliable pet sitters who are passionate about animal care. Whether you need daily walks, overnight care, or just some extra attention for your furry friend, our dedicated sitters are here to help.</p>
-    </section>
-
-    <!-- Values Section -->
-    <section class="values-section">
-      <h2>Our Values</h2>
-      <ul>
-        <li><strong>Trust:</strong> We thoroughly vet all our pet sitters to ensure they are reliable and trustworthy, giving you peace of mind.</li>
-        <li><strong>Care:</strong> Our sitters treat every pet as if they were their own, providing the highest level of care and attention.</li>
-        <li><strong>Community:</strong> We believe in building a supportive community of pet owners and sitters who share a love for animals.</li>
-        <li><strong>Compassion:</strong> We understand that every pet has unique needs and we strive to provide compassionate and personalized care for each one.</li>
-        <li><strong>Safety:</strong> The safety and well-being of your pets is our top priority. We adhere to strict safety protocols to ensure a secure environment.</li>
-      </ul>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works-section">
-      <h2>How It Works</h2>
-      <p>Our platform makes it easy to find the perfect pet sitter for your needs:</p>
-      <ol>
-        <li><strong>Sign Up:</strong> Create an account and fill out your pet's profile.</li>
-        <li><strong>Browse Sitters:</strong> Search for sitters in your area and read reviews from other pet owners.</li>
-        <li><strong>Book a Sitter:</strong> Schedule a meet and greet, and book your chosen sitter.</li>
-        <li><strong>Enjoy Peace of Mind:</strong> Rest easy knowing your pet is in good hands.</li>
-      </ol>
-    </section>
+      <div class="mission-section">
+        <h2>Our Mission</h2>
+        <p>At Pet Care Service, we strive to create a community where pets and their owners are happy and well-cared for. We are dedicated to delivering outstanding services, including pet sitting, dog walking, and grooming. Your pet’s well-being is our top priority, and we are committed to offering the best care through our easy-to-use platform.</p>
+      </div>
+    </div>
   </div>
-  
-  <!-- Footer -->
+
   <%- include('partials/footer') %>
 </body>
 </html>

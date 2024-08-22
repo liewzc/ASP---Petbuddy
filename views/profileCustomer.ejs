@@ -1,120 +1,128 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Customer Profile</title>
-  <link rel="stylesheet" href="/main.css">
-  <style>
-    /* General Styles */
-    body {
-      font-family: 'Times New Roman', Times, serif, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      margin: -10px;
-    }
-
-    .col-md-6, .col-md-8 {
-      padding: 10px;
-      flex: 1;
-    }
-
-    .profile-card {
-      border: 1px solid #dee2e6;
-      border-radius: 0.5rem;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-      margin-bottom: 1.5rem;
-      background-color: #ffffff;
-    }
-
-    .profile-header {
-      background-color: #f8f9fa;
-      padding: 1.5rem;
-      border-bottom: 1px solid #dee2e6;
-    }
-
-    .profile-info {
-      padding: 1.5rem;
-    }
-
-    .pet-photo {
-      max-width: 200px;
-      max-height: 200px;
-      border-radius: 0.5rem;
-      object-fit: cover;
-    }
-
-    .btn-custom {
-      border-radius: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 16px;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-primary {
-      background-color: #4CAF50; /* Green */
-      color: white;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background-color: #45a049;
-    }
-
-    .btn-danger {
-      background-color: #dc3545; /* Red */
-      color: white;
-      border: none;
-    }
-
-    .btn-danger:hover {
-      background-color: #c82333;
-    }
-
-    .error-message {
-      color: red;
-      margin-bottom: 15px;
-    }
-
-    .form-group {
-      margin-bottom: 1rem;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
-    }
-
-    .form-control:focus {
-      border-color: #4CAF50;
-      outline: none;
-      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
-    }
-
-    .form-textarea {
-      resize: vertical;
-    }
-  </style>
-</head>
+  <head>
+    <title>Customer Profile</title>
+    <link rel="stylesheet" href="/main.css">
+    <style>
+      body {
+        font-family: 'Times New Roman', Times, serif, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+  
+      .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+  
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -10px;
+      }
+  
+      .col-md-6, .col-md-8 {
+        padding: 10px;
+        flex: 1;
+      }
+  
+      .profile-card {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        margin-bottom: 1.5rem;
+        background-color: #ffffff;
+      }
+  
+      .profile-header {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-bottom: 1px solid #dee2e6;
+        text-align: center; /* Center the title */
+      }
+  
+      .profile-info {
+        padding: 1.5rem;
+      }
+  
+      .pet-photo {
+        display: block;
+        margin: 0 auto 1rem auto;
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 0.5rem;
+        object-fit: cover;
+      }
+  
+      .btn-custom {
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+      }
+  
+      .btn-primary {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+      }
+  
+      .btn-primary:hover {
+        background-color: #45a049;
+      }
+  
+      .btn-danger {
+        background-color: #dc3545; /* Red */
+        color: white;
+        border: none;
+      }
+  
+      .btn-danger:hover {
+        background-color: #c82333;
+      }
+  
+      .error-message {
+        color: red;
+        margin-bottom: 15px;
+      }
+  
+      .form-group {
+        margin-bottom: 1rem;
+      }
+  
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+  
+      .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+      }
+  
+      .form-control:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+      }
+  
+      .form-textarea {
+        resize: vertical;
+      }
+  
+      .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+    </style>
+  </head>
 <body>
     <%- include('partials/header') %>
 
@@ -133,6 +141,7 @@
                 <p><strong>Address:</strong> <%= profile.address %></p>
                 <p><strong>Emergency Contact:</strong> <%= profile.emergencyContact %></p>
               </div>
+
             </div>
           </div>
 
@@ -143,37 +152,33 @@
                 <h2>Pet Information</h2>
               </div>
               <div class="profile-info">
-                <div class="row">
-                  <div class="col-md-4 d-flex justify-content-center">
-                    <% if (profile.petPhoto) { %>
-                      <img src="/uploads/<%= profile.petPhoto %>" alt="Pet Photo" class="pet-photo">
-                    <% } %>
-                  </div>
-                  <div class="col-md-8">
-                    <p><strong>Pet Name:</strong> <%= profile.petName %></p>
-                    <p><strong>Pet Breed:</strong> <%= profile.petBreed %></p>
-                    <p><strong>Pet Age:</strong> <%= profile.petAge %></p>
-                    <p><strong>Pet Weight:</strong> <%= profile.petWeight %></p>
-                    <p><strong>Pet Health:</strong> <%= profile.petHealth %></p>
-                    <p><strong>Pet Diet:</strong> <%= profile.petDiet %></p>
-                    <p><strong>Pet Allergies:</strong> <%= profile.petAllergies %></p>
-                    <p><strong>Service Frequency:</strong> <%= profile.serviceFrequency %></p>
-                    <p><strong>Special Requirements:</strong> <%= profile.specialRequirements %></p>
-                  </div>
-                </div>
+                <% if (profile.petPhoto) { %>
+                  <img src="/uploads/<%= profile.petPhoto %>" alt="Pet Photo" class="pet-photo">
+                <% } %>
+                <p><strong>Pet Name:</strong> <%= profile.petName %></p>
+                <p><strong>Pet Breed:</strong> <%= profile.petBreed %></p>
+                <p><strong>Pet Age:</strong> <%= profile.petAge %></p>
+                <p><strong>Pet Weight:</strong> <%= profile.petWeight %></p>
+                <p><strong>Pet Health:</strong> <%= profile.petHealth %></p>
+                <p><strong>Pet Diet:</strong> <%= profile.petDiet %></p>
+                <p><strong>Pet Allergies:</strong> <%= profile.petAllergies %></p>
+                <p><strong>Service Frequency:</strong> <%= profile.serviceFrequency %></p>
+                <p><strong>Special Requirements:</strong> <%= profile.specialRequirements %></p>
               </div>
             </div>
           </div>
         </div>
 
         <div class="row mt-4">
-          <div class="col-md-8 text-center">
-            <form action="/edit-profile" method="get" class="d-inline-block mr-2">
-              <button type="submit" class="btn btn-primary btn-custom">Edit Profile</button>
-            </form>
-            <form action="/logout" method="post" class="d-inline-block">
-              <button type="submit" class="btn btn-danger btn-custom">Log Out</button>
-            </form>
+          <div class="col-md-8">
+            <div class="button-group">
+              <form action="/edit-profile" method="get">
+                <button type="submit" class="btn btn-primary btn-custom">Edit Profile</button>
+              </form>
+              <form action="/logout" method="post">
+                <button type="submit" class="btn btn-danger btn-custom">Log Out</button>
+              </form>
+            </div>
           </div>
         </div>
 
@@ -182,7 +187,7 @@
           <div class="col-md-8">
             <div class="profile-card">
               <div class="profile-info">
-                <h1>Create Your Profile</h1>
+                <h1><center>Create Your Profile</center></h1>
                 <form action="/profile" method="post" enctype="multipart/form-data">
                   <h3>Customer Information</h3>        
                   <div class="form-group">
@@ -237,13 +242,16 @@
                   </div>
                   <div class="form-group">
                     <label for="serviceFrequency" class="form-label">Service Frequency:</label>
-                    <textarea id="serviceFrequency" name="serviceFrequency" class="form-control form-textarea" required></textarea>
+                    <input type="text" id="serviceFrequency" name="serviceFrequency" class="form-control" required>
+
                   </div>
                   <div class="form-group">
                     <label for="specialRequirements" class="form-label">Special Requirements:</label>
                     <textarea id="specialRequirements" name="specialRequirements" class="form-control form-textarea" required></textarea>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-custom">Submit</button>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-custom">Submit</button>
+                  </div>
                 </form>
               </div>
             </div>

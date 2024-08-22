@@ -30,17 +30,12 @@ CREATE TABLE UserProfile (
   specialRequirements TEXT
 );
 
-
-
 --- Table: Review
 CREATE TABLE IF NOT EXISTS reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     staffName TEXT NOT NULL,
     rating INT,
     feedback TEXT NOT NULL
-
-);
-
 
 -- Create Booking table
 CREATE TABLE IF NOT EXISTS Bookings (

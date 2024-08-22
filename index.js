@@ -4,6 +4,7 @@ const path = require('path');
 const sqlite3 = require('sqlite3').verbose(); // Import SQLite library
 const fileUpload = require('express-fileupload'); // Import express-fileupload
 const session = require("express-session"); // Import express-session
+const nodemailer = require('nodemailer');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.get('/reviews', (req, res) => {
   calculateAverageRatings((averageRatings) => {
       res.render('reviewPage', { averageRatings });
   });
+
 });
 
 app.post('/submit-review', (req, res) => {
@@ -73,9 +75,90 @@ app.get('/show-reviews', (req, res) => {
   });
 });
 
-// Route for the contact us page
-app.get('/contact', (req, res) => {
-  res.render('contactUsPage');
+app.post('/submit-review', (req, res) => {
+  const { staffName, rating, feedback } = req.body;
+  console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
+  db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
+      if (err) {
+          console.error(err.message);
+      }else {
+        console.log('Review inserted successfully'); // Debugging line
+    }
+      res.redirect('/reviews');
+  });
+});
+
+app.get('/show-reviews', (req, res) => {
+  db.all("SELECT * FROM reviews", (err, rows) => {
+      if (err) {
+          console.error(err.message);
+          res.send("Error retrieving reviews");
+      } else {
+          res.json(rows);
+      }
+  });
+});
+
+
+// Feedback
+// app.post('/sendFeedback', (req, res) => {
+  //   const { name, email, message } = req.body;
+
+//   db.run("INSERT INTO Feedback (name, email, message) VALUES (?, ?, ?)", [name, email, message], (err) => {
+//       if (err) {
+  //           console.error('Error inserting feedback:', err.message);
+  //           res.status(500).send('Error saving feedback');
+  //           return;
+  //       }
+  //       res.redirect('/contact');
+  //   });
+  // });
+  
+  
+  // Route for the contact us page
+  app.get('/contact', (req, res) => {
+    res.render('contactUsPage');
+  });
+
+// Set up the transporter
+const transporter = nodemailer.createTransport({
+  service: 'outlook',
+  auth: {
+      user: 'petbuddyTeam78@outlook.com',
+      pass: 'Petbuddy@78'
+  }
+});
+
+// Function to send email
+const sendFeedbackEmail = (userMessage) => {
+  const mailOptions = {
+      from: 'petbuddyTeam78@outlook.com',
+      to: 'petbuddyTeam78@outlook.com',
+      subject: 'Feedback',
+      text: `User Feedback: \n\n${userMessage}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Email sent: ' + info.response);
+  });
+};
+
+// POST route to handle feedback form submission
+app.post('/contact-us', (req, res) => {
+  const { message } = req.body;
+
+  // Send the feedback via email
+  sendFeedbackEmail(message);
+
+  // Redirect to the confirmation page after email is sent
+  res.redirect('/contactUsConfirmPage');
+});
+
+app.get('/contactUsConfirmPage', (req, res) => {
+  res.render('contactUsConfirmPage'); 
 });
 
 // Route for the register page
@@ -167,23 +250,6 @@ app.get('/booking/bookingform', (req, res) => {
 app.get('/booking/confirmation', (req, res) => {
   res.render('bookingConfirmation');
 });
-
-// Route to render the booking page
-app.get('/booking', (req, res) => {
-  res.render('bookingPage');
-});
-
-// Route for the booking form page
-app.get('/booking/bookingform', (req, res) => {
-  const packageName = req.query.package || 'Default Package';
-  res.render('bookingForm', { package: packageName });
-});
-
-// Route for the confirmation page
-app.get('/booking/confirmation', (req, res) => {
-  res.render('bookingConfirmation');
-});
-
 
 // Route for the forgot password page
 app.get("/forgot-password", (req, res) => {

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Reviews</title>
     <style>
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
@@ -144,4 +143,89 @@
     <!-- Footer -->
     <%- include('partials/footer') %>
 </body>
+
+<style>
+    /* General Page Styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Header and Navigation Styles */
+    header {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+        color: #333;
+        text-decoration: none;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    /* Review Page Styles */
+    #reviewPage {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    #reviewPage h1, #reviewPage h2 {
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    #reviewPage form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #reviewPage label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    #reviewPage input, #reviewPage select, #reviewPage textarea {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    #reviewPage button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        align-self: center;
+    }
+
+    #reviewPage button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Average Ratings Styles */
+    #averageRatings {
+        margin-top: 20px;
+    }
+
+    #averageRatings p {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+</style>
 </html>

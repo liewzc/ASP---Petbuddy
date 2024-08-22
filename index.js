@@ -48,6 +48,31 @@ app.get('/reviews', (req, res) => {
   calculateAverageRatings((averageRatings) => {
       res.render('reviewPage', { averageRatings });
   });
+
+});
+
+app.post('/submit-review', (req, res) => {
+  const { staffName, rating, feedback } = req.body;
+  console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
+  db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
+      if (err) {
+          console.error(err.message);
+      }else {
+        console.log('Review inserted successfully'); // Debugging line
+    }
+      res.redirect('/reviews');
+  });
+});
+
+app.get('/show-reviews', (req, res) => {
+  db.all("SELECT * FROM reviews", (err, rows) => {
+      if (err) {
+          console.error(err.message);
+          res.send("Error retrieving reviews");
+      } else {
+          res.json(rows);
+      }
+  });
 });
 
 app.post('/submit-review', (req, res) => {

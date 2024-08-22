@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edit Profile</title>
+  <link rel="stylesheet" href="/main.css">
+  <style>
+    /* General Styles */
+    body {
+        margin: 0;
+        font-family: 'Times New Roman', Times, serif, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .form-section {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .form-section h1 {
+        margin-top: 0;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #12ce54;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    img {
+        max-width: 100px;
+        margin-top: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+    <%- include('partials/header') %>
+
+    <div class="container">
+      <% if (profile) { %>
+        <div class="form-section">
+          <form action="/update-profile" method="POST" enctype="multipart/form-data">
+            <h1><center>Edit Profile</center></h1>
+            
+            <h2>Customer Information</h2>   
+            <div class="form-group">
+              <label for="fullName">Full Name:</label>
+              <input type="text" id="fullName" name="fullName" value="<%= profile.fullName %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="contactNumber">Contact Number:</label>
+              <input type="text" id="contactNumber" name="contactNumber" value="<%= profile.contactNumber %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="address">Address:</label>
+              <input type="text" id="address" name="address" value="<%= profile.address %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="emergencyContact">Emergency Contact:</label>
+              <input type="text" id="emergencyContact" name="emergencyContact" value="<%= profile.emergencyContact %>" required>
+            </div>
+            
+            <h2>Pet Information</h2>   
+            <div class="form-group">
+              <label for="petPhoto">Pet Photo:</label>
+              <input type="file" id="petPhoto" name="petPhoto">
+              <% if (profile.petPhoto) { %>
+                <img src="/uploads/<%= profile.petPhoto %>" alt="Pet Photo">
+              <% } %>
+            </div>
+
+            <div class="form-group">
+              <label for="petName">Pet Name:</label>
+              <input type="text" id="petName" name="petName" value="<%= profile.petName %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="petBreed">Pet Breed:</label>
+              <input type="text" id="petBreed" name="petBreed" value="<%= profile.petBreed %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="petAge">Pet Age:</label>
+              <input type="number" id="petAge" name="petAge" value="<%= profile.petAge %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="petWeight">Pet Weight:</label>
+              <input type="number" step="0.1" id="petWeight" name="petWeight" value="<%= profile.petWeight %>" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="petHealth">Pet Health:</label>
+              <textarea id="petHealth" name="petHealth" required><%= profile.petHealth %></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="petDiet">Pet Diet:</label>
+              <textarea id="petDiet" name="petDiet" required><%= profile.petDiet %></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="petAllergies">Pet Allergies:</label>
+              <textarea id="petAllergies" name="petAllergies" required><%= profile.petAllergies %></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label for="serviceFrequency">Service Frequency:</label>
+              <textarea id="serviceFrequency" name="serviceFrequency" required><%= profile.serviceFrequency %></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="specialRequirements">Special Requirements:</label>
+              <textarea id="specialRequirements" name="specialRequirements" required><%= profile.specialRequirements %></textarea>
+            </div>
+            
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
+      <% } else { %>
+        <p>Profile not found.</p>
+      <% } %>
+    </div>
+
+    <%- include('partials/footer') %>
+</body>
+</html>

@@ -11,16 +11,31 @@ CREATE TABLE IF NOT EXISTS User (
     created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Table: Review
-CREATE TABLE IF NOT EXISTS Review (
+-- Table: UserProfile
+CREATE TABLE UserProfile (
+  userId INTEGER PRIMARY KEY AUTOINCREMENT,
+  fullName TEXT,
+  contactNumber TEXT,
+  address TEXT,
+  emergencyContact TEXT,
+  petPhoto TEXT,
+  petName TEXT,
+  petBreed TEXT,
+  petAge INTEGER,
+  petWeight REAL,
+  petHealth TEXT,
+  petDiet TEXT,
+  petAllergies TEXT,
+  serviceFrequency TEXT,
+  specialRequirements TEXT
+);
+
+--- Table: Review
+CREATE TABLE IF NOT EXISTS reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    userId INTEGER NOT NULL,
-    staffId INTEGER NOT NULL,
-    reviewText TEXT NOT NULL,
-    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
-    created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (userId) REFERENCES User(id) ON DELETE CASCADE,
-    FOREIGN KEY (staffId) REFERENCES Staff(id) ON DELETE CASCADE
+    staffName TEXT NOT NULL,
+    rating INT,
+    feedback TEXT NOT NULL
 );
 
 -- Create Booking table

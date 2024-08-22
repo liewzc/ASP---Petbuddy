@@ -75,6 +75,12 @@
         .text-blue-500:hover {
             text-decoration: underline;
         }
+
+        textarea {
+            margin-top: 4px;
+            width: 100%;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -91,26 +97,15 @@
             <p>If you require assistance, you can reach out to us through the following channels:</p>
             <p>Our customer service team is available to chat via <a href="https://wa.me/6512345678" target="_blank">WhatsApp</a> from Monday to Friday, 10 AM to 7 PM. For urgent matters outside these hours, please contact one of our outlets directly.</p>
             <p><strong>Phone:</strong> <a href="https://wa.me/6512345678" target="_blank">+65 1234-5678</a></p>
-            <p><strong>Email:</strong> <a href="mailto:petbuddyasp2024@gmail.com">petbuddyasp2024@gmail.com</a></p>
-            <p><strong>Address:</strong> 123 Pet Care Street, Pet City, PC 12345</p>
+            <p><strong>Email:</strong> <a href="mailto:petbuddyTeam78@outlook.com">petbuddyTeam78@outlook.com</a></p>
         </section>
 
         <section>
             <h2>Feedback Form</h2>
             <p>Your feedback is valuable to us. Please fill out the form below to share your thoughts, suggestions, or concerns. We appreciate your input and will strive to address any issues promptly.</p>
-            <form action="/sendFeedback" method="post">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
+            <form action="/contact-us" method="POST">
+                <label for="message">Your Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
                 <button type="submit">Send Feedback</button>
             </form>
         </section>

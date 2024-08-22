@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services - Pet Care Service</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #b77626;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #b97420;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .service-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .service-container:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button-container a {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <%- include('partials/header') %>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Explore the variety of services we offer to ensure your pet's well-being and happiness. From daily feeding to grooming and medical care, we have it all covered.</p>
+
+        <!-- Service Packages -->
+        <section class="service-container">
+            <h2>Service Packages</h2>
+            <div>
+                <h3>Basic Package - SGD $30/1 Hour</h3>
+                <p>Includes scheduled feeding, basic grooming, nail trimming, and cat litter cleaning. Perfect for cost-conscious customers looking for essential pet care.</p>
+            </div>
+            <div>
+                <h3>Medium Package - SGD $50/1.5 Hours</h3>
+                <p>Builds upon the Basic Package with added grooming baths, ear, and eye cleaning. Ideal for pet owners wanting to provide extra care within a moderate budget.</p>
+            </div>
+            <div>
+                <h3>Premium Package - SGD $70/2 Hours</h3>
+                <p>Covers all the services in the Basic and Medium Packages, plus pet daycare services and basic behavior training. Best suited for those seeking comprehensive care for their pets.</p>
+            </div>
+        </section>
+
+        <!-- Supplementary Services -->
+        <section class="service-container">
+            <h2>Supplementary Services</h2>
+            <div>
+                <h3>Pet Training</h3>
+                <p>We offer training sessions from SGD $50 to $150 per session, covering basic commands, behavior correction, and advanced skills. All training is conducted by experienced trainers.</p>
+            </div>
+            <div>
+                <h3>Oral Medication Administration</h3>
+                <p>Our trained staff can safely administer oral medication to your pet for just SGD $5 per administration.</p>
+            </div>
+            <div>
+                <h3>Pet Supply Purchase Assistance</h3>
+                <p>We can assist with purchasing pet supplies, with a service fee of SGD $10 to $20, plus the cost of goods. Enjoy exclusive discounts on items from our partner pet supply stores.</p>
+            </div>
+            <div>
+                <h3>Pet Birthday Parties</h3>
+                <p>We organize pet birthday parties ranging from SGD $200 to $500, including venue decoration, pet-friendly cakes, and treats to make your pet's special day unforgettable.</p>
+            </div>
+        </section>
+
+        <!-- Grooming Services -->
+        <section class="service-container">
+            <h2>Grooming Services</h2>
+            <div>
+                <h3>Ear Cleaning - SGD $10/session</h3>
+                <p>Prevent ear diseases with our professional ear cleaning service.</p>
+            </div>
+            <div>
+                <h3>Hair Care - SGD $20/session</h3>
+                <p>Maintain your pet’s hair health with our specialized hair care services.</p>
+            </div>
+            <div>
+                <h3>Bathing - SGD $30-$70/session</h3>
+                <p>We offer bathing services tailored to your pet’s size and hair length, using products that are safe for their skin.</p>
+            </div>
+            <div>
+                <h3>Nail Trimming - SGD $10/session</h3>
+                <p>Keep your pet’s nails in top condition with our nail trimming services.</p>
+            </div>
+            <div>
+                <h3>Professional Grooming & Styling - SGD $40-$100/session</h3>
+                <p>Our professional grooming and styling services are customized to your pet’s breed and your preferences.</p>
+            </div>
+        </section>
+
+        <!-- Medical Services -->
+        <section class="service-container">
+            <h2>Medical Services</h2>
+            <div>
+                <h3>Pet Medical Transportation - SGD $25-$100</h3>
+                <p>We provide safe transportation for your pet to and from veterinary clinics for vaccinations, sterilizations, and emergency treatments.</p>
+            </div>
+            <div>
+                <h3>Medical Appointment Booking - SGD $10/booking</h3>
+                <p>We manage and book all your pet’s medical appointments, ensuring a hassle-free process.</p>
+            </div>
+            <div>
+                <h3>Pet Health Monitoring Package - SGD $100</h3>
+                <p>Includes regular physical exams, blood tests, and vaccinations in collaboration with veterinary centers to maintain your pet's health.</p>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="button-container">
+            <a href="/booking">Book Now</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+</body>
+</html>

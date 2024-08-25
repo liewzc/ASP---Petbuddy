@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book a Service</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -12,74 +12,256 @@
 
     <div class="page-container">
         <div class="form-container">
-            <h1>Book <%= package %></h1>
-            <form action="/booking/bookingform" method="POST">
-                <input type="hidden" name="package" value="<%= package %>">
+            <h1>Book Your Service</h1>
+            <form action="/booking/confirmation" method="POST">
+                <input type="hidden" name="cart" value='<%= JSON.stringify(cart) %>' />
                 <input type="text" name="name" placeholder="Your Name" required>
-                <input type="date" name="date" placeholder="Select Date" required>
-                <select name="time" required>
-                    <option value="" disabled selected>Select Time</option>
-                    <option value="09:00">09:00 AM</option>
-                    <option value="10:00">10:00 AM</option>
-                    <option value="11:00">11:00 AM</option>
-                    <option value="12:00">12:00 PM</option>
-                    <option value="13:00">01:00 PM</option>
-                    <option value="14:00">02:00 PM</option>
-                    <option value="15:00">03:00 PM</option>
-                    <option value="16:00">04:00 PM</option>
-                    <option value="17:00">05:00 PM</option>
-                </select>
+                <input type="email" name="email" placeholder="Your Email Address" required> 
                 <input type="text" name="address" placeholder="Your Address" required>
                 <input type="tel" name="phone" placeholder="Your Mobile Phone" required>
-                <button type="submit">Submit</button>
+                <input type="date" name="date" id="booking-date" required>
+
+                <!-- Staff Dropdown -->
+                <select name="staff" id="staff-select" required>
+                    <option value="" disabled selected>Select Staff</option>
+                    <option value="Staff 1">Staff 1</option>
+                    <option value="Staff 2">Staff 2</option>
+                    <option value="Staff 3">Staff 3</option>
+                    <option value="Staff 4">Staff 4</option>
+                    <option value="Staff 5">Staff 5</option>
+                    <option value="Staff 6">Staff 6</option>
+                </select>
+
+                <!-- Time Dropdown -->
+                <select name="time" id="time-select" required>
+                    <option value="" disabled selected>Select Time</option>
+                    <!-- Time options will be populated dynamically -->
+                </select>
+
+                <button type="submit">Checkout</button>
             </form>
+        </div>
+
+        <div class="cart-view">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <% if (cart.length === 0) { %>
+                    <li>No items in cart.</li>
+                <% } else { %>
+                    <% cart.forEach(function(item) { %>
+                        <li><%= item.name %> - SGD $<%= item.price %></li>
+                    <% }) %>
+                <% } %>
+            </ul>
+
+            <!-- Display Total Amount -->
+            <div id="total-amount">
+                <strong>Total: SGD $<%= totalAmount %></strong>
+            </div>
         </div>
     </div>
 
-         <!-- Footer -->
-         <%- include('partials/footer') %>
+    <!-- Footer -->
+    <%- include('partials/footer') %>
+
+    <!-- JavaScript to Handle Dynamic Time Slots -->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const staffSelect = document.getElementById('staff-select');
+    const dateInput = document.getElementById('booking-date');
+    const timeSelect = document.getElementById('time-select');
+
+    // Function to format time from "HH:mm" to "hh:mm AM/PM"
+    function formatTime(time) {
+        const [hour, minute] = time.split(':').map(Number);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        const formattedHour = ((hour + 11) % 12 + 1);
+        return `${formattedHour}:${minute.toString().padStart(2, '0')} ${ampm}`;
+    }
+
+    // Function to update available time slots
+    function updateAvailableSlots() {
+        const staffName = staffSelect.value;
+        const bookingDate = dateInput.value;
+
+        console.log(`Selected Staff: ${staffName}, Selected Date: ${bookingDate}`); // Debugging line
+
+        if (!staffName || !bookingDate) {
+            // If either staff or date is not selected, do not update
+            timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
+            return;
+        }
+
+        // Fetch available slots from the server
+        fetch(`/booking/available-slots?staffName=${encodeURIComponent(staffName)}&bookingDate=${encodeURIComponent(bookingDate)}`)
+            .then(response => {
+                console.log('Server response:', response); // Debugging line
+                return response.json();
+            })
+            .then(data => {
+                console.log('Available Slots:', data.availableSlots); // Debugging line
+
+                // Define all possible time slots
+                const allSlots = [
+                    "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+                    "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+                    "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
+                    "18:00", "18:30", "19:00", "19:30", "20:00", "20:30",
+                    "21:00"
+                ];
+
+                // Clear existing options
+                timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
+
+                // Populate the time dropdown
+                allSlots.forEach(slot => {
+                    const option = document.createElement('option');
+                    option.value = slot;
+                    const formatted = formatTime(slot);
+                    if (data.availableSlots.includes(slot)) {
+                        option.textContent = formatted;
+                        option.disabled = false;
+                    } else {
+                        option.textContent = `${formatted} (Unavailable)`;
+                        option.disabled = true;
+                    }
+                    timeSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching available slots:', error);
+            });
+    }
+
+    // Event listeners
+    staffSelect.addEventListener('change', updateAvailableSlots);
+    dateInput.addEventListener('change', updateAvailableSlots);
+});
+    </script>
 </body>
 
 <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-    .page-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex: 1;
-    }
+body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes up at least the full height of the viewport */
+}
 
-    .form-container {
-        background-color: white;
-        padding: 20px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        max-width: 500px; /* Set a maximum width for the form */
-        width: 100%; /* Ensure the form takes full width up to the max-width */
-        margin: 20px;
-    }
-    .form-container h1 {
-        margin-top: 0;
-    }
-    .form-container form {
-        display: flex;
-        flex-direction: column;
-    }
-    .form-container form input,
-    .form-container form select,
-    .form-container form button {
-        margin-bottom: 10px;
-        padding: 10px;
-        font-size: 16px;
-    }
-    .form-container form button {
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-    .form-container form button:hover {
-        background-color: #0056b3;
-    }
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.page-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    max-width: 60%; /* Set a percentage width for the form container */
+    margin-right: 20px; /* Add some space between the form and the cart */
+    flex: 3; /* Ensure the form takes up more space */
+}
+
+.form-container h1 {
+    margin-top: 0;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container form input,
+.form-container form select,
+.form-container form button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-container form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.form-container form button:hover {
+    background-color: #0056b3;
+}
+
+.cart-view {
+    width: 35%; /* Set a percentage width for the cart view */
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Ensure the cart takes up less space */
+}
+
+.cart-view h2 {
+    text-align: center;
+}
+
+#cart-items {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+#cart-items li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+#checkout {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#checkout:hover {
+    background-color: #218838;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between; /* Space between item text and remove button */
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-button {
+    color: black;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+footer {
+    margin-top: auto; /* This pushes the footer to the bottom */
+}
 </style>
 </html>

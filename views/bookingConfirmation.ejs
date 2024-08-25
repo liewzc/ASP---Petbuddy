@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmation</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -14,12 +14,20 @@
         <h1>Thank you for your booking!</h1>
         <p>Your booking has been successfully submitted. Here are the details:</p>
         <ul>
-            <li><strong>Package:</strong> <%= package %></li>
+            <li><strong>Package:</strong>
+                <ul>
+                    <% cart.forEach(function(item) { %>
+                        <li><%= item.name %> - SGD $<%= item.price %></li>
+                    <% }) %>
+                </ul>
+            </li>
             <li><strong>Name:</strong> <%= name %></li>
             <li><strong>Date:</strong> <%= date %></li>
             <li><strong>Time:</strong> <%= time %></li>
+            <li><strong>Staff:</strong> <%= staff %></li> <!-- Display the staff name -->
             <li><strong>Address:</strong> <%= address %></li>
             <li><strong>Phone:</strong> <%= phone %></li>
+            <li><strong>Total Price:</strong> SGD $<%= totalPrice %></li>
         </ul>
     </div>
 

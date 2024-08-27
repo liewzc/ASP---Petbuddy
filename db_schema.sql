@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     staffName TEXT NOT NULL,
     rating INT,
     feedback TEXT NOT NULL
+);
 
 -- Create Booking table
 CREATE TABLE IF NOT EXISTS Bookings (

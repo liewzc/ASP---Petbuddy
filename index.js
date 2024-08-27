@@ -73,22 +73,6 @@ app.get('/show-reviews', (req, res) => {
       }
   });
 });
-
-
-// Feedback
-// app.post('/sendFeedback', (req, res) => {
-  //   const { name, email, message } = req.body;
-
-//   db.run("INSERT INTO Feedback (name, email, message) VALUES (?, ?, ?)", [name, email, message], (err) => {
-//       if (err) {
-  //           console.error('Error inserting feedback:', err.message);
-  //           res.status(500).send('Error saving feedback');
-  //           return;
-  //       }
-  //       res.redirect('/contact');
-  //   });
-  // });
-  
   
   // Route for the contact us page
   app.get('/contact', (req, res) => {

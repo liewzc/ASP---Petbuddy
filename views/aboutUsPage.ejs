@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us & Contact Us - Pet Care Service</title>
     <style>
-        /* General Styles */
         body {
             margin: 0;
             font-family: 'Times New Roman', Times, serif, sans-serif;
@@ -54,7 +53,7 @@
 
         .button {
             padding: 10px 20px;
-            background-color: #007bff; /* Blue color */
+            background-color: #007bff; 
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -127,113 +126,5 @@
 
     <!-- Footer -->
     <%- include('partials/footer') %>
-=======
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Us - Pet Care Service</title>
-  <link rel="stylesheet" href="/main.css">
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      overflow: hidden; /* Prevent scrollbars from appearing */
-      position: relative; /* Required for absolute positioning of the pseudo-element */
-    }
-
-    .main-content {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      border-radius: 12px;
-      position: relative; /* Ensure the overlay effect is positioned correctly */
-      z-index: 1; /* Ensure the content is above the background */
-    }
-
-    .about-us-container {
-      max-width: 900px;
-      width: 100%;
-      padding: 40px;
-      background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.8em;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    p {
-      font-size: 1.2em;
-      line-height: 1.8;
-      color: #666;
-      margin-bottom: 20px;
-    }
-
-    .mission-section {
-      margin-top: 30px;
-    }
-
-    .mission-section h2 {
-      font-size: 2.2em;
-      margin-bottom: 15px;
-      color: #444;
-      font-weight: 600;
-    }
-
-    .mission-section p {
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: #555;
-    }
-
-    footer {
-      background-color: #d3b8ae;
-      padding: 30px;
-      text-align: center;
-      font-family: 'Times New Roman', Times, serif, sans-serif;
-      color: #333;
-      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Blurred background effect */
-    .main-content::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('/catbg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      filter: blur(px); /* Adjust the blur effect as needed */
-      z-index: -1; /* Place it behind the content */
-    }
-  </style>
-</head>
-<body>
-  <%- include('partials/header') %>
-
-  <div class="main-content">
-    <div class="about-us-container">
-      <h1>About Us</h1>
-      <p>Welcome to Pet Care Service! Our goal is to offer exceptional care for your beloved pets, connecting pet owners with reliable and trusted services. We aim to provide peace of mind knowing your pets are in good hands.</p>
-
-      <div class="mission-section">
-        <h2>Our Mission</h2>
-        <p>At Pet Care Service, we strive to create a community where pets and their owners are happy and well-cared for. We are dedicated to delivering outstanding services, including pet sitting, dog walking, and grooming. Your pet’s well-being is our top priority, and we are committed to offering the best care through our easy-to-use platform.</p>
-      </div>
-    </div>
-  </div>
-
-  <%- include('partials/footer') %>
 </body>
 </html>

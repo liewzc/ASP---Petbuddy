@@ -24,16 +24,11 @@ app.use(
 
 // Import the database connection
 const db = require('./models/db');
+const isAuthenticated = require('./middleware');
 
 app.use('/', bookingRoutes); // Use the booking routes
 
-function ensureAuthenticated(req, res, next) {
-  if (req.session && req.session.user) {
-      return next(); // User is authenticated, proceed to the next middleware or route handler
-  } else {
-      res.redirect('/login'); // User is not authenticated, redirect to login page
-  }
-}
+
 
 
 // Route for the homepage
@@ -60,7 +55,7 @@ app.get('/reviews', (req, res) => {
 });
 
 // Protect the submit-review route with the authentication middleware
-app.post('/submit-review', ensureAuthenticated, (req, res) => {
+app.post('/submit-review', isAuthenticated, (req, res) => {
   const { staffName, rating, feedback } = req.body;
   console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
   db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {

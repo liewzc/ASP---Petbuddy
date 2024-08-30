@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload'); // Import express-fileupload
 const session = require("express-session"); // Import express-session
 const nodemailer = require('nodemailer');
 const bookingRoutes = require('./routes/booking');
+const reviewRoutes = require('./routes/review');
 
 const app = express();
 
@@ -27,6 +28,7 @@ const db = require('./models/db');
 const isAuthenticated = require('./middleware');
 
 app.use('/', bookingRoutes); // Use the booking routes
+app.use('/', reviewRoutes); // Use the review routes
 
 
 
@@ -44,64 +46,6 @@ app.get('/about', (req, res) => {
 // Route for the services page
 app.get('/services', (req, res) => {
   res.render('servicePage');
-});
-
-// Route for the reviews page
-app.get('/reviews', (req, res) => {
-  calculateAverageRatings((averageRatings) => {
-      res.render('reviewPage', { averageRatings });
-  });
-
-});
-
-// Protect the submit-review route with the authentication middleware
-app.post('/submit-review', isAuthenticated, (req, res) => {
-  const { staffName, rating, feedback } = req.body;
-  console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
-  db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
-      if (err) {
-          console.error(err.message);
-      } else {
-        console.log('Review inserted successfully'); // Debugging line
-      }
-      res.redirect('/reviews');
-  });
-});
-
-
-app.get('/show-reviews', (req, res) => {
-  db.all("SELECT * FROM reviews", (err, rows) => {
-      if (err) {
-          console.error(err.message);
-          res.send("Error retrieving reviews");
-      } else {
-          res.json(rows);
-      }
-  });
-});
-
-app.post('/submit-review', (req, res) => {
-  const { staffName, rating, feedback } = req.body;
-  console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
-  db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
-      if (err) {
-          console.error(err.message);
-      }else {
-        console.log('Review inserted successfully'); // Debugging line
-    }
-      res.redirect('/reviews');
-  });
-});
-
-app.get('/show-reviews', (req, res) => {
-  db.all("SELECT * FROM reviews", (err, rows) => {
-      if (err) {
-          console.error(err.message);
-          res.send("Error retrieving reviews");
-      } else {
-          res.json(rows);
-      }
-  });
 });
 
   // Route for the contact us page

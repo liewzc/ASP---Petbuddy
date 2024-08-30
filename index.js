@@ -140,6 +140,37 @@ const sendFeedbackEmail = (userMessage) => {
   });
 };
 
+const sendBookingConfirmationEmail = (email, bookingDetails) => {
+  const mailOptions = {
+      from: 'petbuddyTeam78@outlook.com',
+      to: email, // Send the email to the user's email address
+      subject: 'Booking Confirmation',
+      text: `Dear ${bookingDetails.name},
+
+Thank you for booking with us. Here are your booking details:
+
+- Service: ${bookingDetails.packageDetails}
+- Staff: ${bookingDetails.staff}
+- Date: ${bookingDetails.date}
+- Time: ${bookingDetails.time}
+- Address: ${bookingDetails.address}
+
+Total Price: SGD $${bookingDetails.totalPrice}
+
+We look forward to serving you.
+
+Best regards,
+Petbuddy Team`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Booking confirmation email sent: ' + info.response);
+  });
+};
+
 // POST route to handle feedback form submission
 app.post('/contact-us', (req, res) => {
   const { message } = req.body;

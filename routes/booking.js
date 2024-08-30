@@ -1,18 +1,61 @@
 const express = require("express");
 const router = express.Router();
 const db = require('../models/db'); // Import the database connection
+const isAuthenticated = require('../middleware'); // Import the authentication middleware
+
+const nodemailer = require('nodemailer');
+
+// Set up the transporter
+const transporter = nodemailer.createTransport({
+    service: 'outlook',
+    auth: {
+        user: 'petbuddyTeam78@outlook.com',
+        pass: 'Petbuddy@78'
+    }
+});
+
+const sendBookingConfirmationEmail = (email, bookingDetails) => {
+    const mailOptions = {
+        from: 'petbuddyTeam78@outlook.com',
+        to: email, // Send the email to the user's email address
+        subject: 'Booking Confirmation',
+        text: `Dear ${bookingDetails.name},
+
+Thank you for booking with us. Here are your booking details:
+
+- Service: ${bookingDetails.packageDetails}
+- Staff: ${bookingDetails.staff}
+- Date: ${bookingDetails.date}
+- Time: ${bookingDetails.time}
+- Address: ${bookingDetails.address}
+
+Total Price: SGD $${bookingDetails.totalPrice}
+
+We look forward to serving you.
+
+Best regards,
+Petbuddy Team`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error);
+        }
+        console.log('Booking confirmation email sent: ' + info.response);
+    });
+};
 
 // Route to render the booking page
-router.get('/booking', (req, res) => {
+router.get('/booking', isAuthenticated, (req, res) => {
     res.render('bookingPage');
 });
 
 // Route for the confirmation page
-router.get('/booking/confirmation', (req, res) => {
+router.get('/booking/confirmation', isAuthenticated, (req, res) => {
     res.render('bookingConfirmation');
 });
 
-router.get('/booking/bookingform', (req, res) => {
+router.get('/booking/bookingform', isAuthenticated, (req, res) => {
     const cart = req.session.cart || []; // Retrieve the cart from the session
     let totalAmount = 0;
 
@@ -25,7 +68,8 @@ router.get('/booking/bookingform', (req, res) => {
     res.render('bookingForm', { cart: cart, totalAmount: totalAmount });
 });
 
-router.post('/add-to-cart', (req, res) => {
+// Route to add items to the cart
+router.post('/add-to-cart', isAuthenticated, (req, res) => {
     const { packageName, packagePrice } = req.body;
 
     if (!req.session.cart) {
@@ -37,7 +81,8 @@ router.post('/add-to-cart', (req, res) => {
     res.redirect('/booking'); // Redirect to the booking page or wherever appropriate
 });
 
-router.post('/booking/bookingform', (req, res) => {
+// Route for handling the booking form
+router.post('/booking/bookingform', isAuthenticated, (req, res) => {
     const cart = JSON.parse(req.body.cart || '[]');
     let totalAmount = 0;
 
@@ -49,7 +94,7 @@ router.post('/booking/bookingform', (req, res) => {
 });
 
 // Route to get available time slots
-router.get('/booking/available-slots', (req, res) => {
+router.get('/booking/available-slots', isAuthenticated, (req, res) => {
     const { staffName, bookingDate } = req.query;
 
     if (!staffName || !bookingDate) {
@@ -133,6 +178,17 @@ router.post('/booking/confirmation', (req, res) => {
                     // Optionally, clear the cart after booking
                     req.session.cart = [];
 
+                    // Send the booking confirmation email
+                    sendBookingConfirmationEmail(email, {
+                        name,
+                        packageDetails: JSON.stringify(parsedCart),
+                        staff,
+                        date,
+                        time,
+                        address,
+                        totalPrice
+                    });
+
                     // Redirect to the confirmation page or render it with the booking details
                     res.render('bookingConfirmation', { 
                         name, 
@@ -148,8 +204,5 @@ router.post('/booking/confirmation', (req, res) => {
                 });
         });
 });
-
-
-
 
 module.exports = router;

@@ -27,6 +27,15 @@ const db = require('./models/db');
 
 app.use('/', bookingRoutes); // Use the booking routes
 
+function ensureAuthenticated(req, res, next) {
+  if (req.session && req.session.user) {
+      return next(); // User is authenticated, proceed to the next middleware or route handler
+  } else {
+      res.redirect('/login'); // User is not authenticated, redirect to login page
+  }
+}
+
+
 // Route for the homepage
 app.get('/', (req, res) => {
   res.render('homepage');
@@ -50,18 +59,20 @@ app.get('/reviews', (req, res) => {
 
 });
 
-app.post('/submit-review', (req, res) => {
+// Protect the submit-review route with the authentication middleware
+app.post('/submit-review', ensureAuthenticated, (req, res) => {
   const { staffName, rating, feedback } = req.body;
   console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
   db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
       if (err) {
           console.error(err.message);
-      }else {
+      } else {
         console.log('Review inserted successfully'); // Debugging line
-    }
+      }
       res.redirect('/reviews');
   });
 });
+
 
 app.get('/show-reviews', (req, res) => {
   db.all("SELECT * FROM reviews", (err, rows) => {

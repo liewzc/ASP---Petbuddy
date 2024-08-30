@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS User (
 );
 
 -- Table: UserProfile
-CREATE TABLE UserProfile (
+CREATE TABLE IF NOT EXISTS UserProfile (
   userId INTEGER PRIMARY KEY AUTOINCREMENT,
   fullName TEXT,
   contactNumber TEXT,

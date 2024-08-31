@@ -469,21 +469,6 @@ app.post("/logout", (req, res) => {
 
 // Profile customer END-------------------------------------------
 
-function calculateAverageRatings(callback) {
-  const averageRatings = {};
-  db.each("SELECT staffName, AVG(rating) as avgRating FROM reviews GROUP BY staffName", (err, row) => {
-      if (err) {
-          console.error(err.message);
-      } else {
-          
-          averageRatings[row.staffName] = row.avgRating;
-      }
-  }, () => {
-      
-      callback(averageRatings);
-  });
-}
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

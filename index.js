@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose(); // Import SQLite library
 const fileUpload = require('express-fileupload'); // Import express-fileupload
 const session = require("express-session"); // Import express-session
 const nodemailer = require('nodemailer');
@@ -25,13 +24,10 @@ app.use(
 
 // Import the database connection
 const db = require('./models/db');
-const isAuthenticated = require('./middleware');
+const {isAuthenticated, ensureProfileComplete} = require('./middleware');
 
 app.use('/', bookingRoutes); // Use the booking routes
 app.use('/', reviewRoutes); // Use the review routes
-
-
-
 
 // Route for the homepage
 app.get('/', (req, res) => {
@@ -145,6 +141,14 @@ app.post("/register", (req, res) => {
           res.redirect("/register?error=user");
           return;
         }
+
+        // Set session for the newly registered customer
+        req.session.user = {
+          username: username,
+          role: "customer",
+          userId: this.lastID, // Use the last inserted ID as the user ID
+        };
+
         console.log("User registered successfully:", username);
         res.redirect("/login");
       }
@@ -162,38 +166,67 @@ app.get("/login", (req, res) => {
 // Handle login requests
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
+
   db.get(
     "SELECT * FROM User WHERE username = ? AND userpassword = ?",
     [username, password],
     (err, user) => {
       if (err) {
         console.error("Error querying database:", err.message);
-        res.render("loginPage", { error: "Database error" });
-        return;
+        return res.render("loginPage", { error: "Database error" });
       }
+
       if (!user) {
+        // If no user found, check in the Staff table
         db.get(
           "SELECT * FROM Staff WHERE username = ? AND userpassword = ?",
           [username, password],
           (err, worker) => {
             if (err) {
               console.error("Error querying database:", err.message);
-              res.render("loginPage", { error: "Database error" });
-              return;
+              return res.render("loginPage", { error: "Database error" });
             }
+
             if (!worker) {
-              res.render("loginPage", {
-                error: "Invalid username or password",
-              });
+              // Invalid credentials
+              console.log("Invalid username or password for staff.");
+              return res.render("loginPage", { error: "Invalid username or password" });
             } else {
+              // Staff login successful
+              console.log("Staff authenticated:", username);
               req.session.user = { username, role: "staff" }; // Set session for staff
-              res.redirect("/");
+              return res.redirect("/"); // Redirect staff to the homepage or dashboard
             }
           }
         );
       } else {
-        req.session.user = { username, role: "customer", userId: user.id }; // Set session for user with ID
-        res.redirect("/");
+        // Customer login successful
+        console.log("Customer authenticated:", username);
+        req.session.user = { username, role: "customer", userId: user.id }; // Set session for customer
+
+        // Check if the user's profile is complete
+        db.get(
+          "SELECT * FROM UserProfile WHERE userId = ?",
+          [user.id],
+          (err, profile) => {
+            if (err) {
+              console.error("Error querying user profile:", err.message);
+              return res.redirect("/profile"); // Redirect to profile page on error
+            }
+
+            console.log("Performing profile completeness check for user:", username);
+
+            if (!profile || !profile.fullName || !profile.contactNumber || !profile.address) {
+              // If the profile is incomplete, redirect to the profile page
+              console.log("Profile incomplete for user:", username);
+              return res.redirect("/profile");
+            } else {
+              // If the profile is complete, redirect to the homepage
+              console.log("Profile complete for user:", username);
+              return res.redirect("/");
+            }
+          }
+        );
       }
     }
   );

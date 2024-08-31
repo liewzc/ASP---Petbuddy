@@ -128,8 +128,8 @@ html, body {
 
 #homepage .cta-section {
   text-align: center;
-  margin-top: 40px;
-  padding: 50px 20px;
+  margin-top: 20px;
+  padding: 10px 20px;
   background-color: #f8b400;
 }
 
@@ -141,6 +141,7 @@ html, body {
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 #homepage .cta-button:hover {

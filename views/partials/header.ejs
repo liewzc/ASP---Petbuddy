@@ -19,7 +19,11 @@
       <li class="header-li"><a class="header-a" href="/reviews" id="reviews-link">Reviews</a></li>
       <li class="header-li"><a class="header-a" href="/about" id="about-link">About Us</a></li>
       <li class="header-li"><a class="header-a" href="/contact" id="contact-link">Contact Us</a></li>
-      <li class="header-li"><a class="header-a" href="/login" id="login-link">Profile</a></li>
+      <li class="header-li">
+        <a class="header-a" href="<%= user ? '/profile' : '/login' %>" id="login-link">
+            <%= user ? 'Profile' : 'Login' %>
+        </a>
+    </li>
     </ul>
   </nav>
 

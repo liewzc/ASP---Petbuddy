@@ -26,6 +26,11 @@ app.use(
 const db = require('./models/db');
 const {isAuthenticated, ensureProfileComplete} = require('./middleware');
 
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
 app.use('/', bookingRoutes); // Use the booking routes
 app.use('/', reviewRoutes); // Use the review routes
 

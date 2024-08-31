@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose a Package</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
-<body>
+<body id="choose-package-page">
     <!-- Navigation Bar -->
     <%- include('partials/header') %>
 
@@ -54,7 +54,7 @@
             <div class="services-group">
                 <!-- Supplementary Services -->
                 <div class="supplementary-services">
-                    <h2>Supplementary Services</h2>
+                    <h2>Supplementary</h2>
                     <div class="addon" data-addon="Pet Training" data-price="50">
                         <h3>Pet Training</h3>
                         <p>From SGD $50 to $150 per session</p>
@@ -79,7 +79,7 @@
             
                 <!-- Grooming Services -->
                 <div class="grooming-services">
-                    <h2>Grooming Services</h2>
+                    <h2>Grooming</h2>
                     <div class="addon" data-addon="Ear Cleaning" data-price="10">
                         <h3>Ear Cleaning</h3>
                         <p>SGD $10/session</p>
@@ -109,7 +109,7 @@
             
                 <!-- Medical Services -->
                 <div class="medical-services">
-                    <h2>Medical Services</h2>
+                    <h2>Medical</h2>
                     <div class="addon" data-addon="Pet Medical Transportation" data-price="25">
                         <h3>Pet Medical Transportation</h3>
                         <p>SGD $25 to $100</p>
@@ -143,180 +143,4 @@
     
     <script src="/cart.js"></script>
 </body>
-
-<style>
-.container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.service-selection {
-    width: 70%; /* Occupies 70% of the container width */
-}
-
-.packages {
-    display: flex;
-    gap: 20px; /* Space between the packages */
-    margin-bottom: 20px;
-}
-
-.package {
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ensures content is evenly spaced */
-    flex: 1;
-    min-width: 250px;
-    box-sizing: border-box;
-}
-
-.package h3 {
-    margin-top: 0;
-}
-
-.package p,
-.package ul {
-    margin-bottom: 20px; /* Space below text elements */
-}
-
-.package ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 10px 0;
-}
-
-.package button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: auto; /* Push the button to the bottom */
-    align-self: center; /* Center the button horizontally */
-}
-
-.package button:hover {
-    background-color: #0056b3;
-}
-
-.services-group {
-    display: flex;
-    gap: 20px; /* Space between the service columns */
-}
-
-.services-column {
-    display: flex;
-    flex-direction: column;
-    flex: 1; /* Each column takes up equal space */
-    gap: 20px; /* Space between individual services */
-}
-
-.addon {
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ensures button is at the bottom */
-    min-height: 150px; /* Ensure all boxes are of the same height */
-    box-sizing: border-box;
-}
-
-.addon h3 {
-    margin-top: 0;
-}
-
-.addon p,
-.addon ul {
-    margin-bottom: 20px; /* Space below text elements */
-}
-
-.addon ul {
-    list-style-type: disc;
-    padding-left: 20px;
-    margin: 10px 0;
-}
-
-.addon button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: auto; /* Push the button to the bottom */
-    align-self: center; /* Center the button horizontally */
-}
-
-.addon button:hover {
-    background-color: #0056b3;
-}
-
-.cart-view {
-    width: 25%; /* Occupies 25% of the container width */
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-left: 20px; /* Space between the cart and the service selection */
-}
-
-.cart-view h2 {
-    text-align: center;
-}
-
-#cart-items {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 20px;
-}
-
-#cart-items li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-#checkout {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-}
-
-#checkout:hover {
-    background-color: #218838;
-}
-
-#cart-items {
-    list-style-type: none;
-    padding-left: 0;
-    margin-top: 20px;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between; /* Space between item text and remove button */
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.remove-button {
-    color: black;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-    font-size: 16px;
-}
-
-
-
-</style>
 </html>

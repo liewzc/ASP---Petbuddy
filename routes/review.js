@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/db'); // Adjust the path to your db connection file
-const isAuthenticated = require('../middleware'); // Import the authentication middleware
+const {isAuthenticated} = require('../middleware'); // Import the authentication middleware
 
 
 // Route for the reviews page

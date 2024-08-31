@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require('../models/db'); // Import the database connection
-const isAuthenticated = require('../middleware'); // Import the authentication middleware
+const {isAuthenticated} = require('../middleware'); // Import the authentication middleware
 
 const nodemailer = require('nodemailer');
 

@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/main.css">
   <title>Header</title>
- 
+</head>
+<body>
+
   <!-- Navigation Bar -->
   <nav class="header-nav">
-      <div class="header-logo">
-        <img src="/cat logo.png" alt="logo" />
-      </div>
-      <ul class="header-ul">
-        <li class="header-li"><a class="header-a" href="/" id="home-link">Home</a></li>
-        <li class="header-li"><a class="header-a" href="/services" id="services-link">Services</a></li>
-        <li class="header-li"><a class="header-a" href="/reviews" id="reviews-link">Reviews</a></li>
-        <li class="header-li"><a class="header-a" href="/about" id="about-link">About Us</a></li>
-        <li class="header-li"><a class="header-a" href="/contact" id="contact-link">Contact Us</a></li>
-        <li class="header-li"><a class="header-a" href="/login" id="login-link">Login</a></li>
-        <li class="header-li"><a class="header-a" href="/profile" id="profile-link">Profile</a></li>
-      </ul>
+    <div class="header-logo">
+      <img src="/cat logo.png" alt="logo" />
+    </div>
+    <ul class="header-ul">
+      <li class="header-li"><a class="header-a" href="/" id="home-link">Home</a></li>
+      <li class="header-li"><a class="header-a" href="/services" id="services-link">Services</a></li>
+      <li class="header-li"><a class="header-a" href="/reviews" id="reviews-link">Reviews</a></li>
+      <li class="header-li"><a class="header-a" href="/about" id="about-link">About Us</a></li>
+      <li class="header-li"><a class="header-a" href="/contact" id="contact-link">Contact Us</a></li>
+      <li class="header-li">
+        <a class="header-a" href="<%= user ? '/profile' : '/login' %>" id="login-link">
+            <%= user ? 'Profile' : 'Login' %>
+        </a>
+    </li>
+    </ul>
   </nav>
 
   <!-- Add JavaScript to handle the active class -->
@@ -35,64 +41,5 @@
     });
   </script>
 
-  <!-- Inline CSS for Navigation Bar -->
-  <style>
-    .header-nav {
-      background-color: #d3b8ae; /* light brown color */
-      padding: 10px 100px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #000; /* black color */
-    }
-
-    .header-logo img {
-      height: 55px;
-    }
-
-    .header-ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
-
-    .header-li {
-      margin-left: 30px;
-    }
-
-    .header-a {
-      text-decoration: none;
-      color: #000; /* black color */
-      font-size: 16px;
-      position: relative;
-      padding-bottom: 5px; /* Space for underline */
-    }
-
-    .header-a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px; /* Thickness of the underline */
-      background-color: #000; /* Color of the underline */
-      transform: scaleX(0);
-      transform-origin: bottom right;
-      transition: transform 0.3s ease;
-    }
-
-    .header-a:hover::after,
-    .header-a.active::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
-
-    .header-a.active {
-      color: #000; /* Ensures color stays black when active */
-    }
-  </style>
-</head>
-<body>
 </body>
 </html>

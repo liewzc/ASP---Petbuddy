@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmation</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
-<body>
+<body id="booking-confirmation-page">
     <!-- Navigation Bar -->
     <%- include('partials/header') %>
 
@@ -14,43 +14,24 @@
         <h1>Thank you for your booking!</h1>
         <p>Your booking has been successfully submitted. Here are the details:</p>
         <ul>
-            <li><strong>Package:</strong> <%= package %></li>
+            <li><strong>Package:</strong>
+                <ul>
+                    <% cart.forEach(function(item) { %>
+                        <li><%= item.name %> - SGD $<%= item.price %></li>
+                    <% }) %>
+                </ul>
+            </li>
             <li><strong>Name:</strong> <%= name %></li>
             <li><strong>Date:</strong> <%= date %></li>
             <li><strong>Time:</strong> <%= time %></li>
+            <li><strong>Staff:</strong> <%= staff %></li> <!-- Display the staff name -->
             <li><strong>Address:</strong> <%= address %></li>
             <li><strong>Phone:</strong> <%= phone %></li>
+            <li><strong>Total Price:</strong> SGD $<%= totalPrice %></li>
         </ul>
     </div>
 
     <!-- Footer -->
     <%- include('partials/footer') %>
 </body>
-<style>
-    .confirmation-container {
-        background-color: white;
-        padding: 20px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        max-width: 500px;
-        width: 100%;
-        margin: 20px auto;
-        box-sizing: border-box;
-        text-align: center;
-    }
-
-    .confirmation-container h1 {
-        margin-top: 0;
-    }
-
-    .confirmation-container ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .confirmation-container ul li {
-        margin-bottom: 10px;
-        text-align: left;
-    }
-</style>
 </html>

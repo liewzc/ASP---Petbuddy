@@ -4,112 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choose a Package</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
-<body>
+<body id="choose-package-page">
     <!-- Navigation Bar -->
     <%- include('partials/header') %>
 
-    <h1>Choose a Package</h1>
-    <div class="packages">
-        <div class="package">
-            <h2>Package 1</h2>
-            <p>Our Basic Package includes:</p>
-            <ul>
-                <li>30-minute consultation</li>
-                <li>Basic grooming services</li>
-                <li>Nail trimming</li>
-                <li>Ear cleaning</li>
-            </ul>
-            <p>Price: $30</p>
-            <button onclick="window.location.href='/booking/bookingform?package=Package 1'">Select Package</button>
+    <div class="container">
+        <div class="service-selection">
+            <h1>Choose a Package</h1>
+
+            <!-- Service Packages -->
+            <h2>Service Packages</h2>
+            <div class="packages">
+                <div class="package" data-package="Basic Package" data-price="30">
+                    <h3>Basic Package</h3>
+                    <p>SGD $30/1 Hour</p>
+                    <ul>
+                        <li>Scheduled feeding</li>
+                        <li>Basic grooming</li>
+                        <li>Nail trimming</li>
+                        <li>Cat litter cleaning</li>
+                    </ul>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="package" data-package="Medium Package" data-price="50">
+                    <h3>Medium Package</h3>
+                    <p>SGD $50/1.5 Hours</p>
+                    <ul>
+                        <li>All Basic Package services</li>
+                        <li>Grooming baths</li>
+                        <li>Ear and eye cleaning</li>
+                    </ul>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="package" data-package="Premium Package" data-price="70">
+                    <h3>Premium Package</h3>
+                    <p>SGD $70/2 Hours</p>
+                    <ul>
+                        <li>All Medium Package services</li>
+                        <li>Pet daycare services</li>
+                        <li>Basic behavior training</li>
+                    </ul>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Services grouped side by side -->
+            <div class="services-group">
+                <!-- Supplementary Services -->
+                <div class="supplementary-services">
+                    <h2>Supplementary</h2>
+                    <div class="addon" data-addon="Pet Training" data-price="50">
+                        <h3>Pet Training</h3>
+                        <p>From SGD $50 to $150 per session</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Oral Medication Administration" data-price="5">
+                        <h3>Oral Medication Administration</h3>
+                        <p>SGD $5 per administration</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Pet Supply Purchase Assistance" data-price="10">
+                        <h3>Pet Supply Purchase Assistance</h3>
+                        <p>SGD $10 to $20 + cost of goods</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Pet Birthday Parties" data-price="200">
+                        <h3>Pet Birthday Parties</h3>
+                        <p>SGD $200 to $500</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            
+                <!-- Grooming Services -->
+                <div class="grooming-services">
+                    <h2>Grooming</h2>
+                    <div class="addon" data-addon="Ear Cleaning" data-price="10">
+                        <h3>Ear Cleaning</h3>
+                        <p>SGD $10/session</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Hair Care" data-price="20">
+                        <h3>Hair Care</h3>
+                        <p>SGD $20/session</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Bathing" data-price="30">
+                        <h3>Bathing</h3>
+                        <p>SGD $30 to $70/session</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Nail Trimming" data-price="10">
+                        <h3>Nail Trimming</h3>
+                        <p>SGD $10/session</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Professional Grooming & Styling" data-price="40">
+                        <h3>Professional Grooming & Styling</h3>
+                        <p>SGD $40 to $100/session</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            
+                <!-- Medical Services -->
+                <div class="medical-services">
+                    <h2>Medical</h2>
+                    <div class="addon" data-addon="Pet Medical Transportation" data-price="25">
+                        <h3>Pet Medical Transportation</h3>
+                        <p>SGD $25 to $100</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Medical Appointment Booking" data-price="10">
+                        <h3>Medical Appointment Booking</h3>
+                        <p>SGD $10/booking</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="addon" data-addon="Pet Health Monitoring Package" data-price="100">
+                        <h3>Pet Health Monitoring Package</h3>
+                        <p>SGD $100</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="package">
-            <h2>Package 2</h2>
-            <p>Our Standard Package includes:</p>
-            <ul>
-                <li>1-hour consultation</li>
-                <li>Complete grooming services</li>
-                <li>Nail trimming</li>
-                <li>Ear cleaning</li>
-                <li>Teeth brushing</li>
+
+        <div class="cart-view">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <li>No items in cart.</li>
             </ul>
-            <p>Price: $50</p>
-            <button onclick="window.location.href='/booking/bookingform?package=Package 2'">Select Package</button>
-        </div>
-        <div class="package">
-            <h2>Package 3</h2>
-            <p>Our Premium Package includes:</p>
-            <ul>
-                <li>2-hour consultation</li>
-                <li>Complete grooming services</li>
-                <li>Nail trimming</li>
-                <li>Ear cleaning</li>
-                <li>Teeth brushing</li>
-                <li>Medicated bath</li>
-                <li>Specialty fur treatment</li>
-            </ul>
-            <p>Price: $80</p>
-            <button onclick="window.location.href='/booking/bookingform?package=Package 3'">Select Package</button>
+            <button id="checkout" style="display:none;">Checkout</button>
         </div>
     </div>
 
-     <!-- Footer -->
-     <%- include('partials/footer') %>
+    <!-- Footer placed outside the container to ensure it stays at the bottom -->
+    <%- include('partials/footer') %>
+    
+    <script src="/cart.js"></script>
 </body>
-
-<style>
-        .packages {
-            display: flex;
-            justify-content: center; /* Center the packages */
-            gap: 20px; /* Add space between the packages */
-            padding: 20px;
-            flex-wrap: wrap; /* Allow packages to wrap to the next line on smaller screens */
-        }
-
-        .package {
-            border: 1px solid #ccc;
-            padding: 20px;
-            width: 28%;
-            padding-bottom: 60px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            position: relative; /* Ensure absolute positioning works */
-            
-        }
-
-        .package h2, .package p {
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .package ul {
-            list-style-type: disc;
-            padding-left: 20px; /* Add padding to align the discs properly */
-            margin: 0 auto;
-            display: inline-block; /* Center the list */
-            text-align: center; /* Aligns the list items to the left for better readability */
-        }
-
-        .package ul li {
-            padding: 5px 0;
-        }
-
-        .package button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-        position: absolute; /* Position the button absolutely */
-        bottom: 10px; /* Position the button 10px from the bottom */
-        left: 50%;
-        transform: translateX(-50%); /* Center the button horizontally */
-        }
-
-        .package button:hover {
-            background-color: #0056b3;
-        }
-</style>
 </html>

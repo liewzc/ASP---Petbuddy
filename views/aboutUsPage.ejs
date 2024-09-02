@@ -3,125 +3,51 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css">
     <title>About Us & Contact Us - Pet Care Service</title>
-    <style>
-        /* General Styles */
-        body {
-            margin: 0;
-            font-family: 'Times New Roman', Times, serif, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        h1, h2 {
-            margin-top: 0;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        .about-us-section, .mission-section, .values-section, .how-it-works-section {
-            width: 90%;
-            max-width: 1000px;
-            margin-bottom: 20px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        ol {
-            margin-left: 20px;
-        }
-
-        .button {
-            padding: 10px 20px;
-            background-color: #007bff; /* Blue color */
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        .text-blue-500 {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .text-blue-500:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
-<body>
+<body id="about-page">
     <!-- Navigation Bar -->
     <%- include('partials/header') %>
 
     <!-- Main Content -->
     <div class="container">
-        <div class="about-us-section">
-            <h1><center>About Us</center></h1>
-
+        <!-- About Us Card -->
+        <div class="main-card">
+            <h1>About Us</h1>
             <!-- Origin Section -->
-            <section class="mission-section">
-                <h2>Our Origin</h2>
-                <p>Our organization was established to address the stress reactions that cats often experience when they leave their familiar environments, which can lead to health issues and behavioral problems. We understand that cats are highly sensitive to changes in their surroundings. To ensure they receive comprehensive care in a familiar setting while their owners are away, we focus on providing specialized cat care services.</p>
-                <p>Our goal is to create a warm and safe caregiving environment to help cats alleviate anxiety and maintain their well-being. We believe that when owners are away, having their cats cared for in a familiar and loving environment will enhance their quality of life.</p>
-            </section>
+            <div class="section-card">
+                <section class="text-content">
+                    <h2>Our Origin</h2>
+                    <p>Our organization was established to address the stress reactions that cats often experience when they leave their familiar environments, which can lead to health issues and behavioral problems. We understand that cats are highly sensitive to changes in their surroundings. To ensure they receive comprehensive care in a familiar setting while their owners are away, we focus on providing specialized cat care services.</p>
+                    <p>Our goal is to create a warm and safe caregiving environment to help cats alleviate anxiety and maintain their well-being. We believe that when owners are away, having their cats cared for in a familiar and loving environment will enhance their quality of life.</p>
+                </section>
+                <img src="/cat1.jpg" alt="Origin">
+            </div>
 
             <!-- Mission Section -->
-            <section class="mission-section">
-                <h2>Our Mission</h2>
-                <p>At Pet Care Service, our mission is to provide a loving and safe environment for pets while their owners are away, ensuring peace of mind for pet owners. We are dedicated to connecting pet owners with trusted and passionate pet sitters who care deeply about animal welfare. We offer a range of care services including daily walks, overnight care, and additional attention to ensure your furry friends receive the best care possible in your absence.</p>
-            </section>
+            <div class="section-card">
+                <section class="text-content">
+                    <h2>Our Mission</h2>
+                    <p>At Pet Care Service, our mission is to provide a loving and safe environment for pets while their owners are away, ensuring peace of mind for pet owners. We are dedicated to connecting pet owners with trusted and passionate pet sitters who care deeply about animal welfare. We offer a range of care services including daily walks, overnight care, and additional attention to ensure your furry friends receive the best care possible in your absence.</p>
+                </section>
+                <img src="/mission.jpg" alt="Mission">
+            </div>
 
             <!-- Values Section -->
-            <section class="values-section">
-                <h2>Our Values</h2>
-                <ul>
-                    <li><strong>Trust:</strong> We thoroughly vet all our pet sitters to ensure they are reliable and trustworthy, giving you peace of mind.</li>
-                    <li><strong>Care:</strong> Our sitters treat every pet as if they were their own, providing the highest level of care and attention.</li>
-                    <li><strong>Community:</strong> We believe in building a supportive community of pet owners and sitters who share a love for animals.</li>
-                    <li><strong>Compassion:</strong> We understand that every pet has unique needs and we strive to provide compassionate and personalized care for each one.</li>
-                    <li><strong>Safety:</strong> The safety and well-being of your pets is our top priority. We adhere to strict safety protocols to ensure a secure environment.</li>
-                </ul>
-            </section>
-
-            <!-- How It Works Section -->
-            <section class="how-it-works-section">
-                <h2>How It Works</h2>
-                <p>Our platform is designed to be simple and user-friendly, providing you with a worry-free pet care experience. Here’s how to use our platform:</p>
-                <ol>
-                    <li><strong>Sign Up:</strong> Start by creating an account and filling out your pet’s profile.</li>
-                    <li><strong>Browse Sitters:</strong> Search for sitters in your area and review their profiles and feedback from other pet owners.</li>
-                    <li><strong>Book a Sitter:</strong> Choose a suitable sitter, arrange a meet and greet, and make your booking. We recommend a face-to-face meeting to ensure you are satisfied with the sitter’s services.</li>
-                    <li><strong>Enjoy Peace of Mind:</strong> While you are away, rest assured that your pet is receiving care in a familiar environment. Our sitters will provide regular updates and feedback.</li>
-                </ol>
-            </section>
+            <div class="section-card">
+                <section class="text-content">
+                    <h2>Our Values</h2>
+                    <ul>
+                        <li><strong>Trust:</strong> We thoroughly vet all our pet sitters to ensure they are reliable and trustworthy, giving you peace of mind.</li>
+                        <li><strong>Care:</strong> Our sitters treat every pet as if they were their own, providing the highest level of care and attention.</li>
+                        <li><strong>Community:</strong> We believe in building a supportive community of pet owners and sitters who share a love for animals.</li>
+                        <li><strong>Compassion:</strong> We understand that every pet has unique needs and we strive to provide compassionate and personalized care for each one.</li>
+                        <li><strong>Safety:</strong> The safety and well-being of your pets is our top priority. We adhere to strict safety protocols to ensure a secure environment.</li>
+                    </ul>
+                </section>
+                <img src="/cat2.jpg" alt="Values">
+            </div>
         </div>
     </div>
 

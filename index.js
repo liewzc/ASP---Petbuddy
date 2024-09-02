@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose(); // Import SQLite library
 const fileUpload = require('express-fileupload'); // Import express-fileupload
 const session = require("express-session"); // Import express-session
 const nodemailer = require('nodemailer');
+const bookingRoutes = require('./routes/booking');
+const reviewRoutes = require('./routes/review');
 
 const app = express();
 
@@ -21,12 +22,17 @@ app.use(
   })
 );
 
-// Connect to the SQLite database
-const db = new sqlite3.Database('./database.db', (err) => {
-  if (err) {
-    console.error('Error opening database:', err.message);
-  }
+// Import the database connection
+const db = require('./models/db');
+const {isAuthenticated, ensureProfileComplete} = require('./middleware');
+
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
 });
+
+app.use('/', bookingRoutes); // Use the booking routes
+app.use('/', reviewRoutes); // Use the review routes
 
 // Route for the homepage
 app.get('/', (req, res) => {
@@ -43,37 +49,6 @@ app.get('/services', (req, res) => {
   res.render('servicePage');
 });
 
-// Route for the reviews page
-app.get('/reviews', (req, res) => {
-  calculateAverageRatings((averageRatings) => {
-      res.render('reviewPage', { averageRatings });
-  });
-});
-
-app.post('/submit-review', (req, res) => {
-  const { staffName, rating, feedback } = req.body;
-  console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
-  db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
-      if (err) {
-          console.error(err.message);
-      }else {
-        console.log('Review inserted successfully'); // Debugging line
-    }
-      res.redirect('/reviews');
-  });
-});
-
-app.get('/show-reviews', (req, res) => {
-  db.all("SELECT * FROM reviews", (err, rows) => {
-      if (err) {
-          console.error(err.message);
-          res.send("Error retrieving reviews");
-      } else {
-          res.json(rows);
-      }
-  });
-});
-  
   // Route for the contact us page
   app.get('/contact', (req, res) => {
     res.render('contactUsPage');
@@ -102,6 +77,37 @@ const sendFeedbackEmail = (userMessage) => {
           return console.log(error);
       }
       console.log('Email sent: ' + info.response);
+  });
+};
+
+const sendBookingConfirmationEmail = (email, bookingDetails) => {
+  const mailOptions = {
+      from: 'petbuddyTeam78@outlook.com',
+      to: email, // Send the email to the user's email address
+      subject: 'Booking Confirmation',
+      text: `Dear ${bookingDetails.name},
+
+Thank you for booking with us. Here are your booking details:
+
+- Service: ${bookingDetails.packageDetails}
+- Staff: ${bookingDetails.staff}
+- Date: ${bookingDetails.date}
+- Time: ${bookingDetails.time}
+- Address: ${bookingDetails.address}
+
+Total Price: SGD $${bookingDetails.totalPrice}
+
+We look forward to serving you.
+
+Best regards,
+Petbuddy Team`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Booking confirmation email sent: ' + info.response);
   });
 };
 
@@ -140,6 +146,14 @@ app.post("/register", (req, res) => {
           res.redirect("/register?error=user");
           return;
         }
+
+        // Set session for the newly registered customer
+        req.session.user = {
+          username: username,
+          role: "customer",
+          userId: this.lastID, // Use the last inserted ID as the user ID
+        };
+
         console.log("User registered successfully:", username);
         res.redirect("/login");
       }
@@ -157,57 +171,70 @@ app.get("/login", (req, res) => {
 // Handle login requests
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
+
   db.get(
     "SELECT * FROM User WHERE username = ? AND userpassword = ?",
     [username, password],
     (err, user) => {
       if (err) {
         console.error("Error querying database:", err.message);
-        res.render("loginPage", { error: "Database error" });
-        return;
+        return res.render("loginPage", { error: "Database error" });
       }
+
       if (!user) {
+        // If no user found, check in the Staff table
         db.get(
           "SELECT * FROM Staff WHERE username = ? AND userpassword = ?",
           [username, password],
           (err, worker) => {
             if (err) {
               console.error("Error querying database:", err.message);
-              res.render("loginPage", { error: "Database error" });
-              return;
+              return res.render("loginPage", { error: "Database error" });
             }
+
             if (!worker) {
-              res.render("loginPage", {
-                error: "Invalid username or password",
-              });
+              // Invalid credentials
+              console.log("Invalid username or password for staff.");
+              return res.render("loginPage", { error: "Invalid username or password" });
             } else {
+              // Staff login successful
+              console.log("Staff authenticated:", username);
               req.session.user = { username, role: "staff" }; // Set session for staff
-              res.redirect("/");
+              return res.redirect("/"); // Redirect staff to the homepage or dashboard
             }
           }
         );
       } else {
-        req.session.user = { username, role: "customer", userId: user.id }; // Set session for user with ID
-        res.redirect("/");
+        // Customer login successful
+        console.log("Customer authenticated:", username);
+        req.session.user = { username, role: "customer", userId: user.id }; // Set session for customer
+
+        // Check if the user's profile is complete
+        db.get(
+          "SELECT * FROM UserProfile WHERE userId = ?",
+          [user.id],
+          (err, profile) => {
+            if (err) {
+              console.error("Error querying user profile:", err.message);
+              return res.redirect("/profile"); // Redirect to profile page on error
+            }
+
+            console.log("Performing profile completeness check for user:", username);
+
+            if (!profile || !profile.fullName || !profile.contactNumber || !profile.address) {
+              // If the profile is incomplete, redirect to the profile page
+              console.log("Profile incomplete for user:", username);
+              return res.redirect("/profile");
+            } else {
+              // If the profile is complete, redirect to the homepage
+              console.log("Profile complete for user:", username);
+              return res.redirect("/");
+            }
+          }
+        );
       }
     }
   );
-});
-
-// Route to render the booking page
-app.get('/booking', (req, res) => {
-  res.render('bookingPage');
-});
-
-// Route for the booking form page
-app.get('/booking/bookingform', (req, res) => {
-  const packageName = req.query.package || 'Default Package';
-  res.render('bookingForm', { package: packageName });
-});
-
-// Route for the confirmation page
-app.get('/booking/confirmation', (req, res) => {
-  res.render('bookingConfirmation');
 });
 
 // Route for the forgot password page
@@ -479,39 +506,6 @@ app.post("/logout", (req, res) => {
 });
 
 // Profile customer END-------------------------------------------
-
-// Handle form submission
-app.post('/booking/bookingform', (req, res) => {
-  const { package, name, date, time, address, phone } = req.body;
-
-  // Insert booking data into the database
-  db.run(`INSERT INTO Bookings (package, name, date, time, address, phone) VALUES (?, ?, ?, ?, ?, ?)`,
-    [package, name, date, time, address, phone],
-    function(err) {
-      if (err) {
-        console.error('Error inserting booking:', err.message);
-        res.status(500).send('Error saving booking');
-        return;
-      }
-      // Pass booking details to the confirmation page
-      res.render('bookingConfirmation', { package, name, date, time, address, phone });
-    });
-});
-
-function calculateAverageRatings(callback) {
-  const averageRatings = {};
-  db.each("SELECT staffName, AVG(rating) as avgRating FROM reviews GROUP BY staffName", (err, row) => {
-      if (err) {
-          console.error(err.message);
-      } else {
-          
-          averageRatings[row.staffName] = row.avgRating;
-      }
-  }, () => {
-      
-      callback(averageRatings);
-  });
-}
 
 const PORT = process.env.PORT || 3000;
 

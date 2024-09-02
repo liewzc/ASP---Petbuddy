@@ -5,7 +5,9 @@
     <link rel="stylesheet" href="/main.css">
     <link rel="icon" href="/cat logo.png" type="image/png">
   </head>
+
   <body id="customer-profile-page">
+
     <%- include('partials/header') %>
     <div class="container mt-4">
       <% if (profile) { %>
@@ -22,7 +24,6 @@
                 <p><strong>Address:</strong> <%= profile.address %></p>
                 <p><strong>Emergency Contact:</strong> <%= profile.emergencyContact %></p>
               </div>
-
             </div>
           </div>
 
@@ -124,12 +125,12 @@
                   <div class="form-group">
                     <label for="serviceFrequency" class="form-label">Service Frequency:</label>
                     <input type="text" id="serviceFrequency" name="serviceFrequency" class="form-control" required>
-
                   </div>
                   <div class="form-group">
                     <label for="specialRequirements" class="form-label">Special Requirements:</label>
                     <textarea id="specialRequirements" name="specialRequirements" class="form-control form-textarea" required></textarea>
                   </div>
+
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-custom">Submit</button>
                   </div>

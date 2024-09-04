@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Reviews</title>
+</head>
+<body>
+    <h1>User Reviews</h1>
+    <ul>
+        <% reviews.forEach(function(review) { %>
+            <li>
+                <strong>Staff Name:</strong> <%= review.staffName %> <br>
+                <strong>Rating:</strong> <%= review.rating %> <br>
+                <strong>Feedback:</strong> <%= review.feedback %> <br><br>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

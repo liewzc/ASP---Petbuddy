@@ -25,6 +25,17 @@ router.post('/submit-review', isAuthenticated, (req, res) => {
     });
   });
 
+  router.get('/show-reviews', (req, res) => {
+    db.all("SELECT * FROM reviews", (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).send("Error retrieving reviews");
+        } else {
+            res.render('showReviews', { reviews: rows }); // Assuming you have a showReviews.ejs file to display the reviews
+        }
+    });
+});
+
 
   function calculateAverageRatings(callback) {
     const averageRatings = {};

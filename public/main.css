@@ -9,17 +9,17 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Times New Roman', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: rgb(216, 208, 192);
 }
 
 /* Header */
 .header-nav {
-    background-color: #d3b8ae; /* light brown color */
+    background-color: rgb(205, 149, 89); /* light brown color */
     padding: 10px 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #000; /* black color */
 }
 
 .header-logo img {
@@ -39,7 +39,7 @@ html, body {
 
 .header-a {
     text-decoration: none;
-    color: #000; /* black color */
+    color: #333; /* black color */
     font-size: 16px;
     position: relative;
     padding-bottom: 5px; /* Space for underline */
@@ -52,7 +52,7 @@ html, body {
     bottom: 0;
     width: 100%;
     height: 2px; /* Thickness of the underline */
-    background-color: #000; /* Color of the underline */
+    background-color: rgb(247, 203, 157); /* Color of the underline */
     transform: scaleX(0);
     transform-origin: bottom right;
     transition: transform 0.3s ease;
@@ -65,7 +65,7 @@ html, body {
 }
 
 .header-a.active {
-    color: #000; /* Ensures color stays black when active */
+    color: #222; /* Ensures color stays black when active */
 }
 
 /* Home Page */
@@ -85,11 +85,13 @@ html, body {
 #homepage .hero {
   text-align: center;
   margin-top: 20px;
+  color: #333;
 }
 
 #homepage .services-section {
   text-align: center;
   margin-top: 40px;
+  color: #333;
 }
 
 #homepage .services-container {
@@ -101,10 +103,10 @@ html, body {
 }
 
 #homepage .service-card {
-  background-color: white;
+  background-color: rgb(234, 229, 219);
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   width: 300px;
 }
 
@@ -112,12 +114,13 @@ html, body {
   width: 100%;
   height: 200px; /* Set a fixed height */
   object-fit: cover; /* Ensures the image covers the space without stretching */
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 #homepage .testimonials-section {
   text-align: center;
   margin-top: 40px;
+  color: #333;
 }
 
 #homepage .testimonial-container {
@@ -130,7 +133,8 @@ html, body {
   text-align: center;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #f8b400;
+  background-color: rgb(127, 148, 147);
+  color: #333;
 }
 
 #homepage .cta-button {
@@ -139,7 +143,7 @@ html, body {
   color: white;
   padding: 10px 20px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 8px;
   transition: background-color 0.3s;
   margin-top: 10px;
 }
@@ -166,7 +170,7 @@ html, body {
   font-size: 2.5rem;
   margin-bottom: 20px;
   text-align: center;
-  color: #b77626;
+  color: #333;
 }
 
 #services-page section {
@@ -198,7 +202,7 @@ html, body {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
 }
 
@@ -212,11 +216,11 @@ html, body {
 }
 
 #services-page .button-container a {
-  background-color: #4CAF50; /* Green */
+  background-color: rgb(87, 101, 101); 
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
@@ -224,7 +228,7 @@ html, body {
 }
 
 #services-page .button-container a:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 /* Review Page Styles */
@@ -246,7 +250,7 @@ html, body {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   max-width: 600px;
   width: 100%;
 }
@@ -281,21 +285,21 @@ html, body {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 #review-page button {
-  background-color: #4CAF50; /* Green */
+  background-color: rgb(87, 101, 101);  /* Green */
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
 }
 
 #review-page button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #review-page #averageRatings {
@@ -305,7 +309,7 @@ html, body {
 #review-page #averageRatings p {
   background-color: #f0f0f0;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 10px;
 }
 
@@ -337,9 +341,9 @@ html, body {
   width: 95%;
   max-width: 1100px;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: rgb(234, 229, 219);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
 }
 
@@ -353,7 +357,7 @@ html, body {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #about-page .section-card img {
@@ -372,7 +376,7 @@ html, body {
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #about-page ul {
@@ -393,7 +397,7 @@ html, body {
   background-color: #007bff; 
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
   font-size: 16px;
@@ -439,7 +443,7 @@ html, body {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #contact-page h1, #contact-page h2 {
@@ -464,14 +468,14 @@ html, body {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   box-sizing: border-box;
 }
 
 #contact-page button {
   width: 100%;
   padding: 10px;
-  background-color: #28a745; /* Green color */
+  background-color: rgb(87, 101, 101); /* Green color */
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -481,7 +485,7 @@ html, body {
 }
 
 #contact-page button:hover {
-  background-color: #218838;
+  background-color: rgb(127, 148, 147)
 }
 
 #contact-page .mt-4 {
@@ -509,8 +513,6 @@ html, body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Times New Roman', Times, serif, sans-serif;
-  background-color: #f4f4f4;
 }
 
 #login-page .container {
@@ -525,7 +527,7 @@ html, body {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   max-width: 400px;
   width: 100%;
 }
@@ -554,21 +556,21 @@ html, body {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 #login-page button {
-  background-color: #4CAF50; /* Green */
+  background-color: rgb(87, 101, 101); /* Green */
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
 }
 
 #login-page button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #login-page .error-message {
@@ -608,7 +610,7 @@ html, body {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   max-width: 400px;
   width: 100%;
 }
@@ -637,21 +639,21 @@ html, body {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 #register-page button {
-  background-color: #4CAF50; /* Green */
+  background-color: rgb(87, 101, 101); /* Green */
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
 }
 
 #register-page button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 /* Forgot Password Page Styles */
@@ -673,7 +675,7 @@ html, body {
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   max-width: 400px;
   width: 100%;
 }
@@ -702,21 +704,21 @@ html, body {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 #forgot-password-page button {
-  background-color: #4CAF50; /* Green */
+  background-color: rgb(87, 101, 101); /* Green */
   color: white;
   border: none;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
 }
 
 #forgot-password-page button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #forgot-password-page .error-message {
@@ -743,8 +745,7 @@ html, body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Times New Roman', Times, serif, sans-serif;
-  background-color: #f4f4f4;
+
   margin: 0;
   padding: 0;
 }
@@ -769,8 +770,8 @@ html, body {
 
 #customer-profile-page .profile-card {
   border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
   margin-bottom: 1.5rem;
   background-color: #ffffff;
 }
@@ -780,6 +781,7 @@ html, body {
   padding: 1.5rem;
   border-bottom: 1px solid #dee2e6;
   text-align: center; /* Center the title */
+  border-radius: 8px;
 }
 
 #customer-profile-page .profile-info {
@@ -791,12 +793,12 @@ html, body {
   margin: 0 auto 1rem auto;
   max-width: 200px;
   max-height: 200px;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   object-fit: cover;
 }
 
 #customer-profile-page .btn-custom {
-  border-radius: 0.5rem;
+  border-radius: 8px;
   padding: 0.75rem 1.5rem;
   font-size: 16px;
   cursor: pointer;
@@ -804,13 +806,13 @@ html, body {
 }
 
 #customer-profile-page .btn-primary {
-  background-color: #4CAF50;
+  background-color: rgb(87, 101, 101);
   color: white;
   border: none;
 }
 
 #customer-profile-page .btn-primary:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #customer-profile-page .btn-danger {
@@ -841,11 +843,10 @@ html, body {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 0.25rem;
+  border-radius: 8px;
 }
 
 #customer-profile-page .form-control:focus {
-  border-color: #4CAF50;
   outline: none;
   box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
 }
@@ -872,12 +873,13 @@ html, body {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  background-color: rgb(234, 229, 219);
 }
 
 #choose-package-page .service-selection {
   width: 70%; /* Occupies 70% of the container width */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   padding: 20px;
 }
 
@@ -897,7 +899,7 @@ html, body {
   flex: 1;
   box-sizing: border-box;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   min-height: 200px; /* Ensure all boxes are of the same height */
   max-width: 290px;
 }
@@ -919,18 +921,18 @@ html, body {
 
 #choose-package-page .package button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: rgb(87, 101, 101);
   color: white;
   border: none;
   cursor: pointer;
   margin-top: auto; /* Push the button to the bottom */
   align-self: center; /* Center the button horizontally */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #choose-package-page .package button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #choose-package-page .services-group {
@@ -947,7 +949,7 @@ html, body {
 #choose-package-page .addon {
   border: 1px solid #ccc;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -975,7 +977,7 @@ html, body {
 
 #choose-package-page .addon button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: rgb(87, 101, 101);
   color: white;
   border: none;
   cursor: pointer;
@@ -985,7 +987,7 @@ html, body {
 }
 
 #choose-package-page .addon button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #choose-package-page .cart-view {
@@ -993,7 +995,7 @@ html, body {
   border: 1px solid #ccc;
   padding: 20px;
   background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   margin-left: 20px; /* Space between the cart and the service selection */
   border-radius: 8px;
 }
@@ -1016,7 +1018,7 @@ html, body {
 #choose-package-page #checkout {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: rgb(87, 101, 101);
   color: white;
   border: none;
   cursor: pointer;
@@ -1025,7 +1027,7 @@ html, body {
 }
 
 #choose-package-page #checkout:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #choose-package-page .cart-item {
@@ -1059,13 +1061,13 @@ html, body {
 }
 
 #book-service-page .form-container {
-  background-color: white;
+  background-color: rgb(234, 229, 219);
   padding: 20px;
   max-width: 70%; /* Set a percentage width for the form container */
   margin-right: 20px; /* Add some space between the form and the cart */
   flex: 3; /* Ensure the form takes up more space */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 #book-service-page .form-container h1 {
@@ -1087,14 +1089,14 @@ html, body {
 }
 
 #book-service-page .form-container form button {
-  background-color: #45a050;
+  background-color: rgb(87, 101, 101);
   color: white;
   border: none;
   cursor: pointer;
 }
 
 #book-service-page .form-container form button:hover {
-  background-color: #45a049;
+  background-color: rgb(127, 148, 147);
 }
 
 #book-service-page .cart-view {
@@ -1102,7 +1104,7 @@ html, body {
   border: 1px solid #ccc;
   padding: 20px;
   background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   flex: 1; /* Ensure the cart takes up less space */
   border-radius: 8px;
 
@@ -1126,7 +1128,7 @@ html, body {
 #book-service-page #checkout {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #28a745;
+  background-color: rgb(87, 101, 101);
   color: white;
   border: none;
   cursor: pointer;
@@ -1134,7 +1136,7 @@ html, body {
 }
 
 #book-service-page #checkout:hover {
-  background-color: #218838;
+  background-color: rgb(127, 148, 147);
 }
 
 #book-service-page .cart-item {
@@ -1163,8 +1165,8 @@ html, body {
 #booking-confirmation-page .confirmation-container {
   background-color: white;
   padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
   max-width: 500px;
   width: 100%;
   margin: 20px auto;
@@ -1194,8 +1196,7 @@ html, body {
   width: 100% !important; /* Set the width */
   height: 180px !important; /* Set the height */
   padding: 20px 80px !important;
-  font-family: 'Times New Roman', Times, serif, sans-serif;
-  color: #000000 !important;
+  color: #333 !important;
 }
 
 .footer-logo img {
@@ -1214,7 +1215,7 @@ html, body {
 .footer-section p, .footer-link {
     font-size: 1em !important;
     margin: 5px 0 !important;
-    color: #000000 !important;
+    color: #333 !important;
     text-decoration: none !important;
 }
 
@@ -1231,7 +1232,7 @@ html, body {
 footer {
   margin-top: auto !important;
   padding: 20px !important;
-  background-color: #d3b8ae !important; /* light brown color */
+  background-color: rgb(205, 149, 89)!important; /* light brown color */
   text-align: center !important;
   height: 180px !important; 
 }

@@ -1,52 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const db = require('../models/db'); // Import the database connection
-const {isAuthenticated} = require('../middleware'); // Import the authentication middleware
+const {isAuthenticated, ensureProfileComplete} = require('../middleware'); // Import the authentication middleware
+const {sendBookingConfirmationEmail } = require('../nodeMailer'); // Import the sendBookingConfirmationEmail function
 
 const nodemailer = require('nodemailer');
 
-// Set up the transporter
-const transporter = nodemailer.createTransport({
-    service: 'outlook',
-    auth: {
-        user: 'petbuddyTeam78@outlook.com',
-        pass: 'Petbuddy@78'
-    }
-});
-
-const sendBookingConfirmationEmail = (email, bookingDetails) => {
-    const mailOptions = {
-        from: 'petbuddyTeam78@outlook.com',
-        to: email, // Send the email to the user's email address
-        subject: 'Booking Confirmation',
-        text: `Dear ${bookingDetails.name},
-
-Thank you for booking with us. Here are your booking details:
-
-- Service: ${bookingDetails.packageDetails}
-- Staff: ${bookingDetails.staff}
-- Date: ${bookingDetails.date}
-- Time: ${bookingDetails.time}
-- Address: ${bookingDetails.address}
-
-Total Price: SGD $${bookingDetails.totalPrice}
-
-We look forward to serving you.
-
-Best regards,
-Petbuddy Team`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('Booking confirmation email sent: ' + info.response);
-    });
-};
-
 // Route to render the booking page
-router.get('/booking', isAuthenticated, (req, res) => {
+router.get('/booking', isAuthenticated, ensureProfileComplete, (req, res) => {
     res.render('bookingPage');
 });
 

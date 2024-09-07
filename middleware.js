@@ -33,7 +33,4 @@ function ensureProfileComplete(req, res, next) {
 }
 
 // Export both middleware functions
-module.exports = {
-    isAuthenticated,
-    ensureProfileComplete
-};
+module.exports = {isAuthenticated, ensureProfileComplete};

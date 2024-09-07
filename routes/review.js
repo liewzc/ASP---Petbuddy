@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models/db'); // Adjust the path to your db connection file
-const {isAuthenticated} = require('../middleware'); // Import the authentication middleware
+const {isAuthenticated, ensureProfileComplete} = require('../middleware'); // Import the authentication middleware
 
 
 // Route for the reviews page
@@ -12,7 +12,7 @@ router.get('/reviews', (req, res) => {
   });
 
   // Protect the submit-review route with the authentication middleware
-router.post('/submit-review', isAuthenticated, (req, res) => {
+router.post('/submit-review', isAuthenticated, ensureProfileComplete, (req, res) => {
     const { staffName, rating, feedback } = req.body;
     console.log(`Received: ${staffName}, ${rating}, ${feedback}`); // Debugging line
     db.run("INSERT INTO reviews (staffName, rating, feedback) VALUES (?, ?, ?)", [staffName, rating, feedback], (err) => {
